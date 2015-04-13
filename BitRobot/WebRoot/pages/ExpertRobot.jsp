@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; utf-8">
-<title>Insert title here</title>
+<title>Bit Robot</title>
 </head>
 <body>
 
