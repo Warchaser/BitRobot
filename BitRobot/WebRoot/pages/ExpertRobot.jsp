@@ -6,7 +6,7 @@
 		<meta http-equiv="Content-Type" content="text/html; utf-8">
 		<title>Bit Robot</title>
 		<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
-		<!--<script type="text/javascript" src="js/message.js"></script>-->
+		<script type="text/javascript" src="js/message.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/message.css"/>
 	</head>
 	<body>

@@ -20,7 +20,7 @@ $(function () {
 
    
     $("#contentText").keydown(function(e){
-        if (13 == e.which && e.ctrlKey)
+        if (13 == e.which)
             $("#sendButton").trigger("click");
     });
 
@@ -28,19 +28,19 @@ $(function () {
 });
 
 function sendMessage(content) {   //像服务器发送新的消息
-    var receiver = $(".mainDiv .topDiv .rightDiv #onlineDiv ul li div:contains('聊天对象') label:first").text().trim();
+//    var receiver = $(".mainDiv .topDiv .rightDiv #onlineDiv ul li div:contains('聊天对象') label:first").text().trim();
 
     $("#messageSpan").show().html("发送中");
     $.ajax({
         type: "post",
         cache: false,
-        url: "SendMsg.do",
-        data: "content=" + content + "&receiver=" + receiver,
+        url: "servlet/SendQuery",
+        data: "content=" + content,
         dataType:"json",
         success: function (data) {
             if (1 == data.sendResult) {
                 $("#contentText").val("");
-                    addNewMsg(data.sender, receiver, data.sendTime, content);
+                    addNewMsg(data.sendTime, content);
                 $("#messageSpan").html("已发送").fadeOut(2000);
             }
             else {
@@ -56,18 +56,15 @@ function sendMessage(content) {   //像服务器发送新的消息
 
 
 
-function addNewMsg(sender, receiver, sendTime, content) {
+function addNewMsg(sendTime, content) {
     var messageDiv = $("#messageDiv");
-    var newDiv = "<div><h5>" + sender + "</h5>&nbsp;在&nbsp;<h6>" + sendTime + "</h6>&nbsp;";
-
-    if (null != receiver && "所有人" != receiver)
-        newDiv += "对&nbsp;<h5>" + receiver + "</h5>&nbsp;说:<br />";
-    else
-        newDiv += "说:<br />";
+    var newDiv = sendTime + "</h6>&nbsp;";
+ 
+    newDiv += "说:<br />";
 
     newDiv += content + "</div>";
     messageDiv.append(newDiv);
-    var newMsgDiv =  $(".mainDiv .topDiv .leftDiv #messageDiv div:last");
+    var newMsgDiv =  $(".mainDiv .topDiv .rightDiv #messageDiv div:last");
     newMsgDiv.hide().fadeIn(1000);
     $(messageDiv).scrollTop($(messageDiv)[0].scrollHeight);
 }

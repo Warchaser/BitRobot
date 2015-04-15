@@ -49,18 +49,6 @@ html, body {
     color: #000000;
 }
 
-.mainDiv .topDiv .leftDiv #messageDiv div{
-    width:70%;
-    padding:10px;
-    margin-bottom:5px;
-    border-radius:10px;
-    font-size: 20px;
-    display: inline-block;
-    font-family: "Courier New";
-    color: #FFF;
-    background:rgba(118, 134, 255, 0.4);
-}
-
 .mainDiv .topDiv .rightDiv #messageDiv div{
     width:70%;
     padding:10px;
@@ -71,17 +59,16 @@ html, body {
     font-family: "Courier New";
     color: #FFF;
     background:rgba(118, 134, 255, 0.4);
-    float:right;
 }
 
-.mainDiv .topDiv .leftDiv #messageDiv div h5{
+.mainDiv .topDiv .rightDiv #messageDiv div h5{
     font-size: 17px;
     display: inline-block;
     font-family: "Courier New";
     color: #FFA;
 }
 
-.mainDiv .topDiv .leftDiv #messageDiv div h6{
+.mainDiv .topDiv .rightDiv #messageDiv div h6{
     font-size: 17px;
     display: inline-block;
     font-family: "Courier New";

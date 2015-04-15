@@ -1,12 +1,15 @@
 package servlet;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SendQuery extends HttpServlet {
@@ -91,6 +94,21 @@ public class SendQuery extends HttpServlet {
 		JSONObject jsonObject = new JSONObject();
 		
 		int receiveId = 0;
+		
+		Date sendTime = new Date();
+		
+		try {
+			jsonObject.put("sendResult",1);
+//			jsonObject.put("sender",sender);
+			
+			jsonObject.put("sendTime",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(sendTime));
+			
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		response.getWriter().print(jsonObject);
 		
 	}
 
