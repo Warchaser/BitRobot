@@ -21,29 +21,32 @@ html, body {
 }
 
 .mainDiv .bottomDiv {
-    width: 99%;
+	margin-left:100px;
+    width: 95%;
     height: 17%;
 }
 
 .mainDiv .topDiv .leftDiv .showDiv, .mainDiv .topDiv .rightDiv .showDiv {
+	margin-left:100px;
+	margin-right:100px;
     border: #ccc solid 1px;
     background-color: rgba(246, 247, 255, 0.2);
     border-radius: 10px;
-    height: 90%;
-    margin-left:200px;
+    height: 85%;
     padding: 5px;
     font-size: 14px;
     overflow-y: scroll;
     scrollbar-track-color: #FFD6B9;
     scrollbar-base-color: lightblue;
-    
 }
 
 .mainDiv .topDiv .leftDiv span h3, .mainDiv .topDiv .rightDiv span h3 {
+	margin-top:10px;
+	margin-left:100px;
     font-size: 30px;
     display: inline-block;
     font-family: "Consolas", "Monaco", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
-    color: #FFA;
+    color: #000000;
 }
 
 .mainDiv .topDiv .leftDiv #messageDiv div{
@@ -113,36 +116,36 @@ html, body {
     background-color: lightblue;
 }
 
-.mainDiv .topDiv .rightDiv .showDiv ul{
+.mainDiv .topDiv .leftDiv .showDiv ul{
     text-decoration: none;
 
 }
 
-.mainDiv .topDiv .rightDiv .showDiv ul li div{
+.mainDiv .topDiv .leftDiv .showDiv ul li div{
     font-size:25px;
     font-family: "Courier New";
     color:#FFA;
     border-radius:5px;
 }
 
-.mainDiv .topDiv .rightDiv .showDiv ul li div label{
+.mainDiv .topDiv .leftDiv .showDiv ul li div label{
     font-size:17px;
-    color:#EFF;
+    color:#00000;
 }
 
-.mainDiv .topDiv .rightDiv .showDiv ul li div:hover, .mainDiv .topDiv .leftDiv #messageDiv div:hover{
+.mainDiv .topDiv .leftDiv .showDiv ul li div:hover, .mainDiv .topDiv .leftDiv #messageDiv div:hover{
     background:#76B6FF;
 }
 
 .mainDiv .topDiv .leftDiv {
-    width: 69.8%;
+    width: 30%;
     height: 100%;
     display: inline-block;
-    flaot: right;
+    flaot: left;
 }
 
 .mainDiv .topDiv .rightDiv {
-    width: 30%;
+    width: 70%;
     height: 100%;
     display: inline-block;
     float: right;

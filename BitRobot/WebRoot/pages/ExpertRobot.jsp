@@ -14,11 +14,28 @@
 			<div class="topDiv">
 				<div class="leftDiv">
 					<span>
-						<h3>this is the welcome page!!!</h3>
+						<h3>Expert List</h3>
 					</span>
-					<div class="showDiv" id="messageDiv"></div>
+					<div class="showDiv" id="onlineDiv">
+						<ul>
+							<li><div><label>所有人</label><label>（聊天对象）</label></div></li>
+						</ul>
+					</div>
+				</div>
+				<div class="rightDiv">
+					<span>
+						<h3>机器人</h3>
+						<input type="button" value="X" class="exitButton" id="exitButton"/>
+					</span>
+					<div class="showDiv" id="messageDiv">
+					</div>
 				</div>
 			</div>
+			<div class="bottomDiv">
+		        <textarea name="contentText" id="contentText" cols="64" rows="3" class="contentText"></textarea>
+		        <input type="button" value="发送" class="sendButton" id="sendButton"/>
+		        <span id="messageSpan" class="tipSpan"></span>
+	    	</div>
 		</div>
 	</body>
 </html>
