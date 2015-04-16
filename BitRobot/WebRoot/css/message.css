@@ -50,7 +50,7 @@ html, body {
 }
 
 .mainDiv .topDiv .rightDiv #messageDiv div{
-    width:70%;
+    width:100%;
     padding:10px;
     margin-bottom:5px;
     border-radius:10px;
@@ -59,7 +59,7 @@ html, body {
     font-family: "Courier New";
     color: #FFF;
     background:rgba(118, 134, 255, 0.4);
-    float:right;
+
 }
 
 .mainDiv .topDiv .rightDiv #messageDiv div h5{
@@ -75,6 +75,28 @@ html, body {
     font-family: "Courier New";
     color: #4789FF;
 }
+
+.mainDiv .topDiv .rightDiv .messageDiv #rightdiv div{
+    width:20%;
+    padding:10px;
+    margin-bottom:5px;
+    border-radius:10px;
+    font-size: 20px;
+    display: inline-block;
+    font-family: "Courier New";
+    float:right;
+}
+.mainDiv .topDiv .rightDiv .messageDiv #liftdiv div{
+    width:20%;
+    padding:10px;
+    margin-bottom:5px;
+    border-radius:10px;
+    font-size: 20px;
+    display: inline-block;
+    font-family: "Courier New";
+    float:lift;
+}
+
 
 .mainDiv .topDiv .rightDiv span .exitButton {
     height: 30px;
