@@ -96,13 +96,16 @@ public class SendQuery extends HttpServlet {
 		
 		String content = request.getParameter("content");
 		
+		//留着以后区分发送者的身份，分为机器人和用户两种
+//		String sender = request.getParameter("sender");
+		
+		StringFormat stringFormat = new StringFormat();
+		
 		JSONObject jsonObject = new JSONObject();
 		
 		int receiveId = 0;
 		
 		Date sendTime = new Date();
-		
-		StringFormat stringFormat = new StringFormat();
 		
 		int length = content.length();
 		
@@ -116,7 +119,7 @@ public class SendQuery extends HttpServlet {
 				
 		try {
 			jsonObject.put("sendResult",1);
-//			jsonObject.put("sender",sender);
+//			jsonObject.put("sender",);
 			
 			jsonObject.put("content", content);
 			

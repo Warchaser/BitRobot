@@ -4,8 +4,9 @@
 $(function () {
     $("#sendButton").click(function () {  //绑定发送按钮的点击事件
         var content = $("#contentText").val();  //获取输入框的内容
-        if ("" == content) {
+        if ("" == content || "\n" == content) {
             $("#messageSpan").show().html("空消息").fadeOut(2000);
+            $("#contentText").val('');
             return;
         }
 
@@ -35,12 +36,13 @@ function sendMessage(content) {   //像服务器发送新的消息
         type: "post",
         cache: false,
         url: "servlet/SendQuery",
+//        data: "content=" + content + "sender=" + sender,
         data: "content=" + content,
         dataType:"json",
         success: function (data) {
             if (1 == data.sendResult) {
                 $("#contentText").val("");
-                    addNewMsg(data.sendTime, data.content);
+                    addNewMsgRight(data.sendTime, data.content);
                 $("#messageSpan").html("已发送").fadeOut(2000);
             }
             else {
@@ -54,7 +56,7 @@ function sendMessage(content) {   //像服务器发送新的消息
     });
 }
 
-function addNewMsg(sendTime, content) {
+function addNewMsgRight(sendTime, content) {
     var messageDiv = $("#messageDiv");
     var newDiv = "<div><h6>" + sendTime + "</h6>&nbsp;";
  
@@ -62,7 +64,9 @@ function addNewMsg(sendTime, content) {
 
     newDiv += content + "</div>";
     messageDiv.append(newDiv);
+    $(".mainDiv .topDiv .rightDiv #messageDiv div").css("float","right");
     var newMsgDiv =  $(".mainDiv .topDiv .rightDiv #messageDiv div:last");
     newMsgDiv.hide().fadeIn(1000);
     $(messageDiv).scrollTop($(messageDiv)[0].scrollHeight);
 };
+

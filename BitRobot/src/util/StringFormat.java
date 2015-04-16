@@ -7,9 +7,9 @@ package util;
 public class StringFormat {
 	
 	public boolean isLetter(char c) {   
-	       int k = 0x80;   
+	       int k = 0x80;
 	       return c / k == 0 ? true : false;   
-	   }  
+	}
 	  
 	/** 
 	 * 判断字符串是否为空 

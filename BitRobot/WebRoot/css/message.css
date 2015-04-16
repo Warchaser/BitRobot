@@ -59,6 +59,7 @@ html, body {
     font-family: "Courier New";
     color: #FFF;
     background:rgba(118, 134, 255, 0.4);
+    float:right;
 }
 
 .mainDiv .topDiv .rightDiv #messageDiv div h5{

@@ -34,6 +34,7 @@
 			<div class="bottomDiv">
 		        <textarea name="contentText" id="contentText" cols="64" rows="3" class="contentText"></textarea>
 		        <input type="button" value="发送" class="sendButton" id="sendButton"/>
+		        <input type="button" value="发送1" class="sendButton1" id="sendButton1"/>
 		        <span id="messageSpan" class="tipSpan"></span>
 	    	</div>
 		</div>
