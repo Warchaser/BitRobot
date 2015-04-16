@@ -40,7 +40,7 @@ function sendMessage(content) {   //像服务器发送新的消息
         success: function (data) {
             if (1 == data.sendResult) {
                 $("#contentText").val("");
-                    addNewMsg(data.sendTime, content);
+                    addNewMsg(data.sendTime, data.content);
                 $("#messageSpan").html("已发送").fadeOut(2000);
             }
             else {
@@ -54,17 +54,15 @@ function sendMessage(content) {   //像服务器发送新的消息
     });
 }
 
-
-
 function addNewMsg(sendTime, content) {
     var messageDiv = $("#messageDiv");
-    var newDiv = sendTime + "</h6>&nbsp;";
+    var newDiv = "<div><h6>" + sendTime + "</h6>&nbsp;";
  
-    newDiv += "说:<br />";
+    newDiv += "<br />";
 
     newDiv += content + "</div>";
     messageDiv.append(newDiv);
     var newMsgDiv =  $(".mainDiv .topDiv .rightDiv #messageDiv div:last");
     newMsgDiv.hide().fadeIn(1000);
     $(messageDiv).scrollTop($(messageDiv)[0].scrollHeight);
-}
+};

@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import util.StringFormat;
+
 public class SendQuery extends HttpServlet {
 
 	/**
@@ -89,6 +91,9 @@ public class SendQuery extends HttpServlet {
 //		out.flush();
 //		out.close();
 		
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		
 		String content = request.getParameter("content");
 		
 		JSONObject jsonObject = new JSONObject();
@@ -97,9 +102,23 @@ public class SendQuery extends HttpServlet {
 		
 		Date sendTime = new Date();
 		
+		StringFormat stringFormat = new StringFormat();
+		
+		int length = content.length();
+		
+		if(stringFormat.length(content) >= 54){
+			StringBuilder sb = new StringBuilder(content);
+			for(int i = 27;i < length; i += 27){
+				sb.insert(i, "<br />");
+			}
+			content = sb.toString();
+		}
+				
 		try {
 			jsonObject.put("sendResult",1);
 //			jsonObject.put("sender",sender);
+			
+			jsonObject.put("content", content);
 			
 			jsonObject.put("sendTime",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(sendTime));
 			
