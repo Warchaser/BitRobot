@@ -48,7 +48,7 @@ $(function () {
 
    
     $("#contentText").keydown(function(e){
-        if (13 == e.which)
+        if (13 == e.which && ctrlKey)
             $("#sendButton").trigger("click");
     });
 
