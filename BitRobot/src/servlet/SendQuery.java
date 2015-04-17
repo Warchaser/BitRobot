@@ -99,7 +99,7 @@ public class SendQuery extends HttpServlet {
 		//留着以后区分发送者的身份，分为机器人和用户两种
 //		String sender = request.getParameter("sender");
 		
-		StringFormat stringFormat = new StringFormat();
+//		StringFormat stringFormat = new StringFormat();
 		
 		JSONObject jsonObject = new JSONObject();
 		
@@ -107,15 +107,15 @@ public class SendQuery extends HttpServlet {
 		
 		Date sendTime = new Date();
 		
-		int length = content.length();
+//		int length = content.length();
 		
-		if(stringFormat.length(content) >= 54){
-			StringBuilder sb = new StringBuilder(content);
-			for(int i = 27;i < length; i += 27){
-				sb.insert(i, "<br />");
-			}
-			content = sb.toString();
-		}
+//		if(stringFormat.length(content) >= 54){
+//			StringBuilder sb = new StringBuilder(content);
+//			for(int i = 27;i < length; i += 27){
+//				sb.insert(i, "<br />");
+//			}
+//			content = sb.toString();
+//		}
 				
 		try {
 			jsonObject.put("sendResult",1);
