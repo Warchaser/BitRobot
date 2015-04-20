@@ -141,3 +141,6 @@ function addNewMsgRight(sendTime, content) {
     $(messageDiv).scrollTop($(messageDiv)[0].scrollHeight);
 };
 
+function getIp(){
+	document.writeln("IP地址："+ILData[0]+"<br />");
+};

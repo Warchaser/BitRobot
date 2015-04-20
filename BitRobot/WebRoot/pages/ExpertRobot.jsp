@@ -24,7 +24,7 @@
 				</div>
 				<div class="rightDiv">
 					<span>
-						<h3>机器人</h3>
+						<h3>机器人<%=request.getRemoteAddr()%></h3>
 						<input type="button" value="X" class="exitButton" id="exitButton"/>
 					</span>
 					<div class="showDiv" id="messageDiv">
