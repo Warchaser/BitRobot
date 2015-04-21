@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import dbtools.DBConnection;
 import util.StringFormat;
 
 public class SendQuery extends HttpServlet {
@@ -95,6 +96,8 @@ public class SendQuery extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		
 		String content = request.getParameter("content");
+		
+		DBConnection dbConnection = new DBConnection();
 		
 		//留着以后区分发送者的身份，分为机器人和用户两种
 //		String sender = request.getParameter("sender");
