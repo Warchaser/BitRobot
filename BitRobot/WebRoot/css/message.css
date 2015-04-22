@@ -14,16 +14,12 @@ html, body {
     height: 100%;
 }
 
-
-
-
 .mainDiv .leftDiv {
     width: 30%;
     height: 100%;
     overflow: hidden;
   	float:left;
 }
-
 
 .mainDiv .rightDiv {
     width: 70%;
@@ -56,7 +52,7 @@ html, body {
     overflow-y: scroll;
     scrollbar-track-color: #FFD6B9;
     scrollbar-base-color: lightblue;
-     border-radius: 10px;
+    border-radius: 10px;
 }
 
 .mainDiv .rightDiv .righttopDiv .showDiv{
@@ -97,7 +93,7 @@ html, body {
 
 
 .mainDiv .rightDiv #messageDiv div{
-    width:49%;
+    width:70%;
     padding:10px;
     margin-bottom:5px;
     border-radius:10px;

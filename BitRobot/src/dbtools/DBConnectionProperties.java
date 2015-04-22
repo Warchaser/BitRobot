@@ -70,8 +70,15 @@ public class DBConnectionProperties {
 	
 	public static void close(){
 		try {
-			stmt.close();
-			conn.close();
+			if(stmt != null){
+				stmt.close();
+			}
+			
+			if(conn != null){
+				conn.close();
+			}
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
