@@ -14,43 +14,90 @@ html, body {
     height: 100%;
 }
 
-.mainDiv .topDiv {
-    width: 100%;
-    height: 82%;
+
+
+
+.mainDiv .leftDiv {
+    width: 30%;
+    height: 100%;
+    overflow: hidden;
+  	float:left;
+}
+
+
+.mainDiv .rightDiv {
+    width: 70%;
+    height: 90%;
     overflow: hidden;
 }
 
-.mainDiv .bottomDiv {
-	margin-left:100px;
-    width: 93%;
-    height: 17%;
+.mainDiv .rightDiv .righttopDiv{
+    width: 100%;
+    height: 70%;
+    overflow: hidden;
 }
 
-.mainDiv .topDiv .leftDiv .showDiv, .mainDiv .topDiv .rightDiv .showDiv {
+
+.mainDiv .rightDiv .rightbottomDiv{
+    width: 100%;
+    height: 30%;
+    overflow: hidden;
+}
+
+.mainDiv .leftDiv .showDiv  {
 	margin-left:100px;
-	margin-right:100px;
+	margin-right:150px;
+	width:  60%;
+	height: 80%;
     border: #ccc solid 1px;
     background-color: rgba(246, 247, 255,0.35);
-    border-radius: 10px;
-    height: 85%;
     padding: 5px;
     font-size: 14px;
     overflow-y: scroll;
     scrollbar-track-color: #FFD6B9;
     scrollbar-base-color: lightblue;
+     border-radius: 10px;
 }
 
-.mainDiv .topDiv .leftDiv span h3, .mainDiv .topDiv .rightDiv span h3 {
+.mainDiv .rightDiv .righttopDiv .showDiv{
+	margin-left:20px;
+	margin-right:0px;
+	width:  80%;
+    border: #ccc solid 1px;
+    background-color: rgba(246, 247, 255,0.35);
+    border-radius: 10px;
+    height: 80%;
+    padding: 5px;
+    font-size: 14px;
+    overflow-y: scroll;
+    scrollbar-track-color: #FFD6B9;
+    scrollbar-base-color: lightblue;
+
+}
+
+.mainDiv .leftDiv span h3 {
 	margin-top:10px;
-	margin-left:100px;
+	margin-left:130px;
     font-size: 30px;
     display: inline-block;
     font-family: "Consolas", "Monaco", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
     color: #FFFFFF;
 }
 
-.mainDiv .topDiv .rightDiv #messageDiv div{
-    width:51%;
+
+.mainDiv .rightDiv .righttopDiv span h3 {
+	margin-top:10px;
+	margin-left:180px;
+    font-size: 30px;
+    display: inline-block;
+    font-family: "Consolas", "Monaco", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+    color: #FFFFFF;
+}
+
+
+
+.mainDiv .rightDiv #messageDiv div{
+    width:49%;
     padding:10px;
     margin-bottom:5px;
     border-radius:10px;
@@ -61,29 +108,31 @@ html, body {
     background:rgba(118, 134, 255, 0.4);
     word-wrap:break-word;
     word-break:break-all;
-    float:right;
+   
 }
 
-.mainDiv .topDiv .rightDiv #messageDiv div h5{
+.mainDiv .rightDiv #messageDiv div h5{
     font-size: 17px;
     display: inline-block;
     font-family: "Courier New";
     color: #FFA;
 }
 
-.mainDiv .topDiv .rightDiv #messageDiv div h6{
+.mainDiv .rightDiv #messageDiv div h6{
     font-size: 17px;
     display: inline-block;
     font-family: "Courier New";
     color: #4789FF;
 }
 
-.mainDiv .topDiv .rightDiv span .exitButton {
+
+
+.mainDiv  .rightDiv span .exitButton {
     height: 30px;
     width: 30px;
     margin: 3px 3px 0px 0px;
     vertical-align: middle;
-    border: 0px;
+    border: 10px;
     border-radius: 15px;
     background-color: #5AB;
     float: right;
@@ -91,101 +140,99 @@ html, body {
     color: #FFA;
 }
 
-.mainDiv .topDiv .leftDiv .showDiv::-webkit-scrollbar, .mainDiv .topDiv .rightDiv .showDiv::-webkit-scrollbar, .mainDiv .bottomDiv .contentText::-webkit-scrollbar {
+.mainDiv .leftDiv .showDiv::-webkit-scrollbar, .mainDiv .rightDiv .righttopDiv .showDiv::-webkit-scrollbar, .mainDiv .rightDiv.rightbottomDiv .contentText::-webkit-scrollbar {
     border-radius: 10px;
     background-color: #F5F5F5;
+
 }
 
-.mainDiv .topDiv .leftDiv .showDiv::-webkit-scrollbar-track, .mainDiv .topDiv .rightDiv .showDiv::-webkit-scrollbar-track, .mainDiv .bottomDiv .contentText::-webkit-scrollbar-track {
+.mainDiv .leftDiv .showDiv::-webkit-scrollbar-track, .mainDiv .rightDiv .righttopDiv .showDiv::-webkit-scrollbar-track, .mainDiv .rightDiv.rightbottomDiv .contentText::-webkit-scrollbar-track {
     border-radius: 10px;
     background-color: #FFD6B9;
+
 }
 
-.mainDiv .topDiv .leftDiv .showDiv::-webkit-scrollbar-thumb, .mainDiv .topDiv .rightDiv .showDiv::-webkit-scrollbar-thumb, .mainDiv .bottomDiv .contentText::-webkit-scrollbar-thumb {
+.mainDiv .leftDiv .showDiv::-webkit-scrollbar-thumb, .mainDiv .rightDiv .righttopDiv .showDiv::-webkit-scrollbar-thumb, .mainDiv .rightDiv.rightbottomDiv .contentText::-webkit-scrollbar-thumb {
     border-radius: 5px;
     background-color: lightblue;
+
 }
 
-.mainDiv .topDiv .leftDiv .showDiv ul{
+.mainDiv .leftDiv .showDiv ul{
     text-decoration: none;
 
 }
 
-.mainDiv .topDiv .leftDiv .showDiv ul li div{
+.mainDiv .leftDiv .showDiv ul li div{
     font-size:25px;
     font-family: "Courier New";
     color:#FFA;
     border-radius:5px;
 }
 
-.mainDiv .topDiv .leftDiv .showDiv ul li div label{
+.mainDiv .leftDiv .showDiv ul li div label{
     font-size:17px;
     color:#00000;
 }
 
-.mainDiv .topDiv .leftDiv .showDiv ul li div:hover, .mainDiv .topDiv .leftDiv #messageDiv div:hover{
+.mainDiv .leftDiv .showDiv ul li div:hover, .mainDiv .leftDiv #messageDiv div:hover{
     background:#76B6FF;
 }
 
-.mainDiv .topDiv .leftDiv {
-    width: 30%;
-    height: 100%;
-    display: inline-block;
-    flaot: left;
-}
 
-.mainDiv .topDiv .rightDiv {
+
+.mainDiv .rightDiv .rightbottomDiv .contentText {
     width: 70%;
-    height: 100%;
-    display: inline-block;
-    float: right;
-}
-
-.mainDiv .bottomDiv .contentText {
-    width: 90%;
-    height: 100%;
+    height: 90%;
     background-color: rgba(255, 255, 255, 1.0);
+    margin-top:15px;
+    margin-left:20px;
     border: 1px solid #76B6FF;
     font-size: 20px;
     font-family: "Courier New";
-    resize: none;
+    resize: 30%;
     float: left;
     scrollbar-track-color: #FFD6B9;
     scrollbar-base-color: lightblue;
+    border-radius: 10px;
 }
 
-.mainDiv .bottomDiv .contentText:hover{
-    border: 1px solid #4789FF;
-}
-
-.mainDiv .bottomDiv .sendButton {
-    height: 50px;
-    width: 50px;
+.mainDiv .rightDiv .rightbottomDiv .sendButton {
+    height: 100px;
+    width: 100px;
     vertical-align: middle;
-    margin: 30px 0px 0px 5px;
+	margin-left : 40px;
+	margin-top : 40px;
     border: 0px;
-    border-radius: 25px;
+    border-radius: 50px;
     background-color: #5AB;
     float: left;
     font-size: 20px;
     color: #FFA;
 }
 
-.mainDiv .bottomDiv .sendButton:hover, .mainDiv .topDiv .rightDiv span .exitButton:hover {
+
+.mainDiv .rightDiv .rightbottomDiv .contentText:hover{
+    border: 1px solid #4789FF;
+}
+
+
+
+.mainDiv .rightDiv .rightbottomDiv .sendButton:hover, .mainDiv  .rightDiv .righttopDiv span .exitButton:hover {
     background: #FAC;
     border-radius: 25px;
 }
 
-.mainDiv .bottomDiv .sendButton:focus, .mainDiv .topDiv .rightDiv span .exitButton:focus {
+.mainDiv .rightDiv .rightbottomDiv .sendButton:focus, .mainDiv  .rightDiv .righttopDiv span .exitButton:focus {
     outline: none;
 }
 
-.mainDiv .bottomDiv .tipSpan {
+.mainDiv .rightDiv .rightbottomDiv .tipSpan {
     height: 100%;
     width: 70px;
     text-align: center;
     line-height: 95px;
-    font-size: 14px;
+    font-size: 15px;
     word-wrap: normal;
     color: #4789FF;
     float: left;

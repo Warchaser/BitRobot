@@ -11,8 +11,9 @@
 	</head>
 	<body>
 		<div class="mainDiv">
-			<div class="topDiv">
-				<div class="leftDiv">
+		
+		
+			<div class="leftDiv" >
 					<span>
 						<h3>Expert List</h3>
 					</span>
@@ -21,7 +22,34 @@
 							<li><div><label>所有人</label><label>（聊天对象）</label></div></li>
 						</ul>
 					</div>
-				</div>
+			</div>
+			<div class="rightDiv">
+					<div class="righttopDiv">
+						<span>
+							<h3>机器人<%=request.getRemoteAddr()%></h3>
+							<input type="button" value="X" class="exitButton" id="exitButton"/>
+						</span>
+						<div class="showDiv" id="messageDiv">
+						</div>
+					</div>
+					
+					<div class="rightbottomDiv">
+						
+			
+							
+		       		 		 <textarea name="contentText" id="contentText" cols="64" rows="3" class="contentText"></textarea>
+		        			 <input type="button" value="发送" class="sendButton" id="sendButton"/>
+		        			 <span id="messageSpan" class="tipSpan"></span>  
+ 		         			 <input type="button" value="发送1" class="sendButton1" id="sendButton1"/>
+		        			
+	    			
+					
+					</div>
+					
+			</div>
+		
+	<!-- 	<div class="topDiv"> 	
+				
 				<div class="rightDiv">
 					<span>
 						<h3>机器人<%=request.getRemoteAddr()%></h3>
@@ -32,10 +60,12 @@
 				</div>
 			</div>
 			<div class="bottomDiv">
+			
+				<input type="button" value="发送" class="sendButton" id="sendButton"/>
 		        <textarea name="contentText" id="contentText" cols="64" rows="3" class="contentText"></textarea>
-		        <input type="button" value="发送" class="sendButton" id="sendButton"/>
-		        <input type="button" value="发送1" class="sendButton1" id="sendButton1"/>
-		        <span id="messageSpan" class="tipSpan"></span>
+		        
+ 		         <input type="button" value="发送1" class="sendButton1" id="sendButton1"/> 
+		        <span id="messageSpan" class="tipSpan"></span> -->
 	    	</div>
 		</div>
 	</body>
