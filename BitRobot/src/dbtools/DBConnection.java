@@ -13,7 +13,7 @@ import java.sql.Statement;
 
 public class DBConnection {
 	private String driver = "com.mysql.jdbc.Driver";
-	private String dbUrl = "jdbc:mysql://127.0.0.1:3306/bishe"; 
+	private String dbUrl = "jdbc:mysql://127.0.0.1:3306/bishe";
     private String user = "wu"; 
     private String password = "123456";
 	private Connection conn = null; 
