@@ -11,7 +11,6 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
-import org.apache.lucene.document.StringField;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
@@ -112,7 +111,7 @@ public class SearchLogic{
 			
 			if(searcher != null){
 				
-				TopDocs results = searcher.search(query, 100);
+				TopDocs results = searcher.search(query, 5);
 				hits = results.scoreDocs;
 				
 				for(int i = hits.length - 1; i >= 0; i--){

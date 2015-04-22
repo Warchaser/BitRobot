@@ -2,7 +2,9 @@ package servlet;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -12,7 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import bean.SearchBean;
 import dbtools.DBConnection;
+import util.SearchLogic;
 import util.StringFormat;
 
 public class SendQuery extends HttpServlet {
@@ -96,8 +100,15 @@ public class SendQuery extends HttpServlet {
 		response.setCharacterEncoding("UTF-8");
 		
 		String content = request.getParameter("content");
+		String contentTrans = "";
 		
-		DBConnection dbConnection = new DBConnection();
+		SearchLogic search = new SearchLogic();
+		
+		String [] queryStrings = {content,content + "*"};
+		String [] fields = {"title","abs"};
+		String indexPath = "D:\\index1";
+		
+		List<SearchBean> searchList = new ArrayList<SearchBean>();
 		
 		//留着以后区分发送者的身份，分为机器人和用户两种
 //		String sender = request.getParameter("sender");
@@ -120,11 +131,25 @@ public class SendQuery extends HttpServlet {
 //			content = sb.toString();
 //		}
 				
+//		search.createIndex(search.getResult("select expert_id,date,title,org,author,abs,url from interviews"), indexPath);
+		searchList = search.searcher(queryStrings, fields, indexPath);
+		search.closeBD();
+		
+		int listSize = searchList.size();
+		
+		for(int i = 0; i < listSize;i++){
+			contentTrans += searchList.get(i).getTitle();
+			contentTrans += "</br>";
+			contentTrans += searchList.get(i).getAbs();
+			contentTrans += "</br>";
+			contentTrans += "<a href=" + searchList.get(i).getUrl() + ">" + "点此链接" + "</a></br>";
+		}
+		
 		try {
 			jsonObject.put("sendResult",1);
 //			jsonObject.put("sender",);
 			
-			jsonObject.put("content", content);
+			jsonObject.put("content", contentTrans);
 			
 			jsonObject.put("sendTime",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(sendTime));
 			
