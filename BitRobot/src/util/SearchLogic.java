@@ -8,9 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
+import org.apache.lucene.document.StringField;
+import org.apache.lucene.document.TextField;
 import org.apache.lucene.index.IndexReader;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
@@ -57,13 +60,15 @@ public class SearchLogic{
 		
 		IndexWriter indexWriter = null;
 		
-//		Analyzer ikanlyzer = new IKAnalyzer();
-		Analyzer ikanlyzer = new StandardAnalyzer(Version.LUCENE_43);
+//		Analyzer ikanlyzer = new IKAnalyzer(false);
+//		Analyzer ikanlyzer = new StandardAnalyzer(Version.LUCENE_43);
+		SmartChineseAnalyzer ikanlyzer = new SmartChineseAnalyzer(Version.LUCENE_43);
 
 		
 		IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_43,ikanlyzer); 
 
 		iwc.setOpenMode(OpenMode.CREATE);
+//		iwc.setOpenMode(OpenMode.APPEND);
 		
 		
 		try {
@@ -75,9 +80,9 @@ public class SearchLogic{
 				Document doc = new Document();
 //				doc.add(new StringField("title",rs.getString("title"), Field.Store.YES));
 //				doc.add(new StringField("abs",rs.getString("abs"), Field.Store.YES));
-				doc.add(new Field("abs",rs.getString("abs"), Field.Store.YES,Field.Index.ANALYZED));
-				doc.add(new Field("title",rs.getString("title"), Field.Store.YES,Field.Index.ANALYZED));
-				doc.add(new Field("url",rs.getString("url"), Field.Store.YES,Field.Index.ANALYZED));
+				doc.add(new TextField("abs",rs.getString("abs"), Field.Store.YES));
+				doc.add(new TextField("title",rs.getString("title"), Field.Store.YES));
+				doc.add(new TextField("url",rs.getString("url"), Field.Store.YES));
 //				doc.add(new Field("name",rs.getString("Au_name"), Field.Store.YES,Field.Index.ANALYZED));
 				indexWriter.addDocument(doc);
 			}
@@ -94,7 +99,10 @@ public class SearchLogic{
 		ScoreDoc [] hits = null;
 		Query query = null;
 		
-		Analyzer ikanlyzer = new IKAnalyzer();
+//		Analyzer ikanlyzer = new IKAnalyzer();
+//		Analyzer ikanlyzer = new StandardAnalyzer(Version.LUCENE_43);
+		SmartChineseAnalyzer ikanlyzer = new SmartChineseAnalyzer(Version.LUCENE_43);
+
 		IndexReader reader = null;
 		IndexSearcher searcher = null;
 		

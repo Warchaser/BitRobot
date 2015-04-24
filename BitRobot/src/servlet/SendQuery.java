@@ -81,20 +81,6 @@ public class SendQuery extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-//		response.setContentType("text/html");
-//		PrintWriter out = response.getWriter();
-//		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-//		out.println("<HTML>");
-//		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-//		out.println("  <BODY>");
-//		out.print("    This is ");
-//		out.print(this.getClass());
-//		out.println(", using the POST method");
-//		out.println("  </BODY>");
-//		out.println("</HTML>");
-//		out.flush();
-//		out.close();
 		
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -110,51 +96,43 @@ public class SendQuery extends HttpServlet {
 		
 		List<SearchBean> searchList = new ArrayList<SearchBean>();
 		
-		//留着以后区分发送者的身份，分为机器人和用户两种
-//		String sender = request.getParameter("sender");
-		
-//		StringFormat stringFormat = new StringFormat();
-		
 		JSONObject jsonObject = new JSONObject();
 		
-		int receiveId = 0;
-		
 		Date sendTime = new Date();
-		
-//		int length = content.length();
-		
-//		if(stringFormat.length(content) >= 54){
-//			StringBuilder sb = new StringBuilder(content);
-//			for(int i = 27;i < length; i += 27){
-//				sb.insert(i, "<br />");
-//			}
-//			content = sb.toString();
-//		}
 				
 //		search.createIndex(search.getResult("select expert_id,date,title,org,author,abs,url from interviews"), indexPath);
 		searchList = search.searcher(queryStrings, fields, indexPath);
 		search.closeBD();
 		
 		int listSize = searchList.size();
-		
-		for(int i = 0; i < listSize;i++){
-			contentTrans += searchList.get(i).getTitle();
-			contentTrans += "</br>";
-			contentTrans += searchList.get(i).getAbs();
-			contentTrans += "</br>";
-			contentTrans += "<a href=" + searchList.get(i).getUrl() + ">" + "点此链接" + "</a></br>";
-		}
-		
+
 		try {
-			jsonObject.put("sendResult",1);
-//			jsonObject.put("sender",);
 			
-			jsonObject.put("content", contentTrans);
+			if(listSize > 0){
+				for(int i = listSize - 1; i >= 0;i--){
+					contentTrans += searchList.get(i).getTitle();
+					contentTrans += "</br>";
+					contentTrans += searchList.get(i).getAbs();
+					contentTrans += "</br>";
+					contentTrans += "<a href=" + searchList.get(i).getUrl() + " target=\"_blank\">" + "点此链接" + "</a></br>";
+				}
+				jsonObject.put("sendResult",1);
+				
+				jsonObject.put("content", contentTrans);
+				
+				jsonObject.put("sendTime",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(sendTime));
+			}
+			else{
+				jsonObject.put("sendResult",1);
+				
+				jsonObject.put("content", "木有查到啊～亲～");
+				
+				jsonObject.put("sendTime",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(sendTime));
+			}
 			
-			jsonObject.put("sendTime",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(sendTime));
+			
 			
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
