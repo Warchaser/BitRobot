@@ -92,18 +92,9 @@ html, body {
 
 
 
-.mainDiv .rightDiv #messageDiv div{
-    width:70%;
-    padding:10px;
-    margin-bottom:5px;
-    border-radius:10px;
-    font-size: 20px;
-    display: inline-block;
-    font-family: "Courier New";
-    color: #FFF;
-    background:rgba(118, 134, 255, 0.4);
-    word-wrap:break-word;
-    word-break:break-all;
+.mainDiv .rightDiv .righttopDiv  #messageDiv div{
+	
+
    
 }
 
@@ -170,6 +161,7 @@ html, body {
     font-size:17px;
     color:#00000;
 }
+
 .mainDiv .leftDiv .showDiv ul li div:hover, .mainDiv .leftDiv #messageDiv div:hover{
     background:#76B6FF;
 }
@@ -233,3 +225,49 @@ html, body {
     float: left;
     overflow: hidden;
 }
+
+
+
+.mainDiv .send {
+	position:relative;
+	max-width:55%;
+	background:rgba(118, 134, 255, 0.4);
+	border-radius:5px; /* 圆角 */
+	margin:30px auto 0;
+	
+	padding:10px;
+	
+	margin-top:10px;
+	font-size: 20px;
+	display: inline-block;
+	font-family: "Courier New";
+	color: #FFF;
+	word-wrap:break-word;
+	word-break:break-all;
+}
+
+.mainDiv .send .arrowright {
+	position:absolute;
+	top:15px;
+	right:-16px; /* 圆角的位置需要细心调试哦 */
+	width:0;
+	height:0;
+	font-size:0;
+	border:solid 8px;
+	border-color:transparent  transparent  transparent  rgba(118, 134, 255, 0.4);
+}
+
+
+.mainDiv .send .arrowleft{
+	position:relative;
+	top:1px;
+	right:26px; /* 圆角的位置需要细心调试哦 */
+	width:0;
+	height:0;
+	font-size:0;
+	border:solid 8px;
+	border-color:  transparent rgba(118, 134, 255, 0.4) transparent  transparent;
+}
+
+
+
