@@ -52,10 +52,6 @@ public class SearchLogic{
 		
 		File indexDir = new File(indexPath);
 		
-		if(!indexDir.exists()) {  
-			indexDir.mkdir();  
-        }
-		
 		Directory dir = null;
 		
 		IndexWriter indexWriter = null;
@@ -67,9 +63,8 @@ public class SearchLogic{
 		
 		IndexWriterConfig iwc = new IndexWriterConfig(Version.LUCENE_43,ikanlyzer); 
 
-		iwc.setOpenMode(OpenMode.CREATE);
+		iwc.setOpenMode(OpenMode.CREATE_OR_APPEND);//有完整的索引直接读，无索引创建
 //		iwc.setOpenMode(OpenMode.APPEND);
-		
 		
 		try {
 			

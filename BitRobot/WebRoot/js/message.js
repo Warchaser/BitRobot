@@ -65,7 +65,7 @@ function addNewMsgByServer(sendTime,content) {
     newDiv += content + "</div>";
     messageDiv.append(newDiv);
 //    $(".mainDiv .topDiv .rightDiv #messageDiv div").css("float","right");
-    var newMsgDiv =  $(".mainDiv .topDiv .rightDiv #messageDiv div:last");
+    var newMsgDiv =  $(".mainDiv .rightDiv .righttopDiv  #messageDiv div:last");
     newMsgDiv.hide().fadeIn(1000);
     $(messageDiv).scrollTop($(messageDiv)[0].scrollHeight);
 };
@@ -81,7 +81,7 @@ function addNewMsgRightByUser(content) {
     newDiv += content + "</div>";
     messageDiv.append(newDiv);
 //    $(".mainDiv .topDiv .rightDiv #messageDiv div").css("float","right");
-    var newMsgDiv =  $(".mainDiv .topDiv .rightDiv #messageDiv div:last");
+    var newMsgDiv =  $(".mainDiv .rightDiv .righttopDiv  #messageDiv div:last");
     newMsgDiv.hide().fadeIn(1000);
     $(messageDiv).scrollTop($(messageDiv)[0].scrollHeight);
 };

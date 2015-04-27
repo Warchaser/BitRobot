@@ -1,5 +1,6 @@
 package servlet;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -85,7 +86,7 @@ public class SendQuery extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		
-		String content = request.getParameter("content");
+		String content = request.getParameter("content").trim();
 		String contentTrans = "";
 		
 		SearchLogic search = new SearchLogic();
@@ -99,8 +100,17 @@ public class SendQuery extends HttpServlet {
 		JSONObject jsonObject = new JSONObject();
 		
 		Date sendTime = new Date();
-				
-//		search.createIndex(search.getResult("select expert_id,date,title,org,author,abs,url from interviews"), indexPath);
+		
+		File file = new File(indexPath);
+		
+		if(!file.exists()) {  
+			file.mkdir();  
+        }
+		
+		if(file.listFiles().length == 0){
+			search.createIndex(search.getResult("select expert_id,date,title,org,author,abs,url from interviews"), indexPath);
+		}
+		
 		searchList = search.searcher(queryStrings, fields, indexPath);
 		search.closeBD();
 		
@@ -109,7 +119,7 @@ public class SendQuery extends HttpServlet {
 		try {
 			
 			if(listSize > 0){
-				for(int i = listSize - 1; i >= 0;i--){
+				for(int i = listSize - 1;i >= 0;i--){
 					contentTrans += searchList.get(i).getTitle();
 					contentTrans += "</br>";
 					contentTrans += searchList.get(i).getAbs();

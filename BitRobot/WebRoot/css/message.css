@@ -170,7 +170,6 @@ html, body {
     font-size:17px;
     color:#00000;
 }
-
 .mainDiv .leftDiv .showDiv ul li div:hover, .mainDiv .leftDiv #messageDiv div:hover{
     background:#76B6FF;
 }
