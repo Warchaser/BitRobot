@@ -14,8 +14,8 @@ $(function () {
         sendMessage(content);
     });
 
-    $(document).on("click", ".mainDiv .topDiv .rightDiv #onlineDiv ul li div", function () {
-        $(".mainDiv .topDiv .rightDiv #onlineDiv ul li div:contains('聊天对象') label:last").remove();
+    $(document).on("click", ".mainDiv .rightDiv .righttopDiv #onlineDiv ul li div", function () {
+        $(".mainDiv .rightDiv .righttopDiv #onlineDiv ul li div:contains('聊天对象') label:last").remove();
         $(this).append("<label>  (聊天对象)</label>");
     });
 
@@ -57,31 +57,22 @@ function sendMessage(content) {   //像服务器发送新的消息
 
 function addNewMsgByServer(sendTime,content) {
     var messageDiv = $("#messageDiv");
-//    var newDiv = "<div><h6>" + sendTime + "</h6>&nbsp;";
-    var newDiv = "<div style=\"" + "float: left; display: block;\"" + "><h6>" + sendTime + "</h6>&nbsp;";
- 
-    newDiv += "<br />";
-
+    var newDiv = "<div style=\"float: left; display: block; clear:both;\"> <img style=\" float:left; width:50px; height:50px;   border-radius:50px; clear:both;\"  src=\"images/avatar.jpg\" /> </div>" +
+     			   "<div class = \"send\"  style = \"float:left;  margin-left:20px;\">"+"<div class=\"arrowleft\"></div>" + "<h6>" + "</h6>";
     newDiv += content + "</div>";
     messageDiv.append(newDiv);
-//    $(".mainDiv .topDiv .rightDiv #messageDiv div").css("float","right");
-    var newMsgDiv =  $(".mainDiv .rightDiv .righttopDiv  #messageDiv div:last");
+    var newMsgDiv =  $(".mainDiv .send:last");
     newMsgDiv.hide().fadeIn(1000);
     $(messageDiv).scrollTop($(messageDiv)[0].scrollHeight);
 };
 
 function addNewMsgRightByUser(content) {
     var messageDiv = $("#messageDiv");
-//    var newDiv = "<div><h6>" + sendTime + "</h6>&nbsp;";
-//    var newDiv = "<div style=\"" + "float: right; display: block;\"" + "><h6>" + sendTime + "</h6>&nbsp;";
-    var newDiv = "<div style=\"" + "float: right; display: block;\"" + "><h6>" + "</h6>&nbsp;";
- 
-    newDiv += "<br />";
-
+    var newDiv = "<div style=\"float: right; display: block;clear:both;\"> <img style=\" float:right;  width:50px; height:50px;   border-radius:50px; \"  src=\"images/avatar.jpg\" /> </div>"+
+    			 "<div class = \"send\" style = \"float:right; margin-right:20px;\" >"+"<div class=\"arrowright\"></div>" + "<h6>" + "</h6>";
     newDiv += content + "</div>";
     messageDiv.append(newDiv);
-//    $(".mainDiv .topDiv .rightDiv #messageDiv div").css("float","right");
-    var newMsgDiv =  $(".mainDiv .rightDiv .righttopDiv  #messageDiv div:last");
+    var newMsgDiv =  $(".mainDiv .send:last");
     newMsgDiv.hide().fadeIn(1000);
     $(messageDiv).scrollTop($(messageDiv)[0].scrollHeight);
 };
