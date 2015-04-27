@@ -232,7 +232,7 @@ html, body {
 	position:relative;
 	max-width:55%;
 	background:rgba(118, 134, 255, 0.4);
-	border-radius:5px; /* 鍦嗚 */
+	border-radius:5px; /* 圆角 */
 	margin:30px auto 0;
 	
 	padding:10px;
@@ -249,7 +249,7 @@ html, body {
 .mainDiv .send .arrowright {
 	position:absolute;
 	top:15px;
-	right:-16px; /* 鍦嗚鐨勪綅缃渶瑕佺粏蹇冭皟璇曞摝 */
+	right:-16px; /* 圆角的位置需要细心调试哦 */
 	width:0;
 	height:0;
 	font-size:0;
@@ -261,7 +261,7 @@ html, body {
 .mainDiv .send .arrowleft{
 	position:relative;
 	top:1px;
-	right:26px; /* 鍦嗚鐨勪綅缃渶瑕佺粏蹇冭皟璇曞摝 */
+	right:26px; /* 圆角的位置需要细心调试哦 */
 	width:0;
 	height:0;
 	font-size:0;
