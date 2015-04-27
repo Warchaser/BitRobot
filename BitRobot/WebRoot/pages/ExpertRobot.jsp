@@ -11,8 +11,6 @@
 	</head>
 	<body>
 		<div class="mainDiv">
-		
-		
 			<div class="leftDiv" >
 					<span>
 						<h3>Expert List</h3>
@@ -37,6 +35,9 @@
         			 <span id="messageSpan" class="tipSpan"></span>
 				</div>
 			</div>
+			
+			
+			
 		</div>
 	</body>
 </html>
