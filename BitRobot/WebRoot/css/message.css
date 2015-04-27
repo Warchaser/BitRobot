@@ -23,20 +23,20 @@ html, body {
 
 .mainDiv .rightDiv {
     width: 70%;
-    height: 90%;
+    height: 100%;
     overflow: hidden;
 }
 
 .mainDiv .rightDiv .righttopDiv{
     width: 100%;
-    height: 70%;
+    height: 80%;
     overflow: hidden;
 }
 
 
 .mainDiv .rightDiv .rightbottomDiv{
     width: 100%;
-    height: 30%;
+    height: 20%;
     overflow: hidden;
 }
 
@@ -44,7 +44,7 @@ html, body {
 	margin-left:100px;
 	margin-right:150px;
 	width:  60%;
-	height: 80%;
+	height: 85%;
     border: #ccc solid 1px;
     background-color: rgba(246, 247, 255,0.35);
     padding: 5px;
@@ -58,7 +58,7 @@ html, body {
 .mainDiv .rightDiv .righttopDiv .showDiv{
 	margin-left:20px;
 	margin-right:0px;
-	width:  80%;
+	width:  90%;
     border: #ccc solid 1px;
     background-color: rgba(246, 247, 255,0.35);
     border-radius: 10px;
@@ -170,9 +170,9 @@ html, body {
 
 .mainDiv .rightDiv .rightbottomDiv .contentText {
     width: 70%;
-    height: 90%;
+    height: 80%;
     background-color: rgba(255, 255, 255, 1.0);
-    margin-top:15px;
+    margin-top:0px;
     margin-left:20px;
     border: 1px solid #76B6FF;
     font-size: 20px;
@@ -185,11 +185,11 @@ html, body {
 }
 
 .mainDiv .rightDiv .rightbottomDiv .sendButton {
-    height: 100px;
-    width: 100px;
+    height: 75px;
+    width: 75px;
     vertical-align: middle;
 	margin-left : 40px;
-	margin-top : 40px;
+	margin-top : 10px;
     border: 0px;
     border-radius: 50px;
     background-color: #5AB;
