@@ -56,7 +56,7 @@ public class SearchLogic{
 		
 		IndexWriter indexWriter = null;
 		
-//		Analyzer ikanlyzer = new IKAnalyzer(false);
+//		Analyzer ikanlyzer = new IKAnalyzer(true);
 //		Analyzer ikanlyzer = new StandardAnalyzer(Version.LUCENE_43);
 		SmartChineseAnalyzer ikanlyzer = new SmartChineseAnalyzer(Version.LUCENE_43);
 
@@ -75,6 +75,7 @@ public class SearchLogic{
 				Document doc = new Document();
 //				doc.add(new StringField("title",rs.getString("title"), Field.Store.YES));
 //				doc.add(new StringField("abs",rs.getString("abs"), Field.Store.YES));
+//				doc.add(new StringField("url",rs.getString("abs"),Field.Store.YES));
 				doc.add(new TextField("abs",rs.getString("abs"), Field.Store.YES));
 				doc.add(new TextField("title",rs.getString("title"), Field.Store.YES));
 				doc.add(new TextField("url",rs.getString("url"), Field.Store.YES));
@@ -94,9 +95,9 @@ public class SearchLogic{
 		ScoreDoc [] hits = null;
 		Query query = null;
 		
-//		Analyzer ikanlyzer = new IKAnalyzer();
+		Analyzer ikanlyzer = new IKAnalyzer();
 //		Analyzer ikanlyzer = new StandardAnalyzer(Version.LUCENE_43);
-		SmartChineseAnalyzer ikanlyzer = new SmartChineseAnalyzer(Version.LUCENE_43);
+//		SmartChineseAnalyzer ikanlyzer = new SmartChineseAnalyzer(Version.LUCENE_43);
 
 		IndexReader reader = null;
 		IndexSearcher searcher = null;

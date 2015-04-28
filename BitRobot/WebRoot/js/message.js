@@ -3,7 +3,7 @@
  */
 $(function () {
     $("#sendButton").click(function () {  //绑定发送按钮的点击事件
-        var content = $("#contentText").val();  //获取输入框的内容
+        var content =  $.trim($("#contentText").val());//获取输入框的内容
         if ("" == content || "\n" == content) {
             $("#messageSpan").show().html("空消息").fadeOut(2000);
             $("#contentText").val('');
