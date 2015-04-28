@@ -95,7 +95,7 @@ public class SearchLogic{
 		ScoreDoc [] hits = null;
 		Query query = null;
 		
-		Analyzer ikanlyzer = new IKAnalyzer();
+		Analyzer ikanlyzer = new IKAnalyzer(true);
 //		Analyzer ikanlyzer = new StandardAnalyzer(Version.LUCENE_43);
 //		SmartChineseAnalyzer ikanlyzer = new SmartChineseAnalyzer(Version.LUCENE_43);
 
@@ -115,7 +115,7 @@ public class SearchLogic{
 			
 			if(searcher != null){
 				
-				TopDocs results = searcher.search(query, 5);
+				TopDocs results = searcher.search(query, 100);
 				hits = results.scoreDocs;
 				
 				for(int i = hits.length - 1; i >= 0; i--){

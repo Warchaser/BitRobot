@@ -103,8 +103,8 @@ public class SendQuery extends HttpServlet {
 		
 		File file = new File(indexPath);
 		
-		if(!file.exists()) {  
-			file.mkdir();  
+		if(!file.exists()) {
+			file.mkdir();
         }
 		
 		if(file.listFiles().length == 0){
@@ -115,11 +115,17 @@ public class SendQuery extends HttpServlet {
 		search.closeBD();
 		
 		int listSize = searchList.size();
+		
+		int requestNum = 5;
+		
+		if(listSize <= requestNum){
+			requestNum = 0; 
+		}
 
 		try {
 			
 			if(listSize > 0){
-				for(int i = listSize - 1;i >= 0;i--){
+				for(int i = listSize - 1;i >= listSize - requestNum;i--){
 					contentTrans += searchList.get(i).getTitle();
 					contentTrans += "</br>";
 					contentTrans += searchList.get(i).getAbs();
