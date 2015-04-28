@@ -83,10 +83,13 @@ public class SendQuery extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
+		//指定前后台的输入输出字符集均为utf-8
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		
+		//获取前台输入框中的信息
 		String content = request.getParameter("content").trim();
+		//定义转换之后的字符串
 		String contentTrans = "";
 		
 		SearchLogic search = new SearchLogic();
@@ -103,10 +106,12 @@ public class SendQuery extends HttpServlet {
 		
 		File file = new File(indexPath);
 		
+		//不存在目录就创建
 		if(!file.exists()) {
 			file.mkdir();
         }
 		
+		//不存在索引就走完整的流程
 		if(file.listFiles().length == 0){
 			search.createIndex(search.getResult("select expert_id,date,title,org,author,abs,url from interviews"), indexPath);
 		}
@@ -115,7 +120,7 @@ public class SendQuery extends HttpServlet {
 		search.closeBD();
 		
 		int listSize = searchList.size();
-		
+		//获取请求的数量
 		int requestNum = 5;
 		
 		if(listSize <= requestNum){
@@ -123,7 +128,6 @@ public class SendQuery extends HttpServlet {
 		}
 
 		try {
-			
 			if(listSize > 0){
 				for(int i = listSize - 1;i >= listSize - requestNum;i--){
 					contentTrans += searchList.get(i).getTitle();
