@@ -28,6 +28,33 @@ $(function () {
     
 });
 
+function loadExpertList() {   //像服务器发送新的消息
+	
+	console.log("loadExpertList");
+	
+    $.ajax({
+        type: "post",
+        cache: false,
+        url: "servlet/LoadExpertListOnInit",
+//        data: "content=" + content + "sender=" + sender,
+        data: "",
+        dataType:"json",
+        success: function (data) {
+//            if (1 == data.sendResult) {
+//            	addNewMsgByServer(data.sendTime,data.content);
+//                $("#messageSpan").html("已发送").fadeOut(2000);
+//            }
+//            else {
+//                $("#messageSpan").html("发送失败").fadeOut(2000);
+//            }
+        },
+        error: function () {
+//            alert("服务器连接错误");
+//            $("#messageSpan").html("发送失败").fadeOut(2000);
+        }
+    });
+}
+
 function sendMessage(content) {   //像服务器发送新的消息
     $("#messageSpan").show().html("发送中");
     $("#contentText").val("");

@@ -9,7 +9,7 @@
 		<script type="text/javascript" src="js/message.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/message.css"/>
 	</head>
-	<body>
+	<body onLoad="loadExpertList()">
 		<div class="mainDiv">
 			<div class="leftDiv" >
 					<span>
@@ -35,8 +35,6 @@
         			 <span id="messageSpan" class="tipSpan"></span>
 				</div>
 			</div>
-			
-			
 			
 		</div>
 	</body>

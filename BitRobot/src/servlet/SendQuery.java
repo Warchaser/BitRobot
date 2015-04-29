@@ -2,19 +2,26 @@ package servlet;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import bean.ExpertInfoBean;
 import bean.SearchBean;
 import dbtools.DBConnection;
 import util.SearchLogic;
@@ -80,12 +87,20 @@ public class SendQuery extends HttpServlet {
 	 * @throws ServletException if an error occurred
 	 * @throws IOException if an error occurred
 	 */
+	@SuppressWarnings("unchecked")
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		//指定前后台的输入输出字符集均为utf-8
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
+		
+		//获取application中的键值对应的对象
+		ServletContext application = request.getServletContext();
+		
+		Map<String,ExpertInfoBean> map = new HashMap<String,ExpertInfoBean>();
+		
+		map = (Map<String, ExpertInfoBean>) application.getAttribute("listMap");
 		
 		//获取前台输入框中的信息
 		String content = request.getParameter("content").trim();
@@ -124,33 +139,51 @@ public class SendQuery extends HttpServlet {
 		int requestNum = 5;
 		
 		if(listSize <= requestNum){
-			requestNum = 0; 
+			requestNum = listSize;
 		}
 
+		String expertName = "";
+
 		try {
-			if(listSize > 0){
-				for(int i = listSize - 1;i >= listSize - requestNum;i--){
-					contentTrans += searchList.get(i).getTitle();
-					contentTrans += "</br>";
-					contentTrans += searchList.get(i).getAbs();
-					contentTrans += "</br>";
-					contentTrans += "<a href=" + searchList.get(i).getUrl() + " target=\"_blank\">" + "点此链接" + "</a></br>";
-				}
+			if(null != map.get(content)){
+				expertName = map.get(content).getExpertName();
+		
+				contentTrans += "少侠是要问我的信息？</br>";
+				contentTrans += "我是" + content + ",";
+				contentTrans += map.get(content).getJob_position() + "。";
+				contentTrans += "参与过" + map.get(content).getProject();
+				contentTrans += map.get(content).getEmployment_direction();
+				
 				jsonObject.put("sendResult",1);
 				
 				jsonObject.put("content", contentTrans);
 				
 				jsonObject.put("sendTime",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(sendTime));
+				
 			}
 			else{
-				jsonObject.put("sendResult",1);
-				
-				jsonObject.put("content", "木有查到啊～亲～");
-				
-				jsonObject.put("sendTime",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(sendTime));
+				if(listSize > 0){
+					for(int i = listSize - 1;i >= listSize - requestNum;i--){
+						contentTrans += searchList.get(i).getTitle();
+						contentTrans += "</br>";
+						contentTrans += searchList.get(i).getAbs();
+						contentTrans += "</br>";
+						contentTrans += "<a href=" + searchList.get(i).getUrl() + " target=\"_blank\">" + "点此链接" + "</a></br>";
+					}
+					jsonObject.put("sendResult",1);
+					
+					jsonObject.put("content", contentTrans);
+					
+					jsonObject.put("sendTime",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(sendTime));
+				}
+				else{
+					jsonObject.put("sendResult",1);
+					
+					jsonObject.put("content", "木有查到啊～亲～");
+					
+					jsonObject.put("sendTime",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(sendTime));
+				}
 			}
-			
-			
 			
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -169,4 +202,10 @@ public class SendQuery extends HttpServlet {
 		// Put your code here
 	}
 
+	@Override
+	protected void service(HttpServletRequest req, HttpServletResponse resp)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		super.service(req, resp);
+	}
 }

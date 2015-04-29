@@ -142,7 +142,7 @@ public class SearchLogic{
 		
 		SearchLogic search = new SearchLogic();
 		
-		String [] queryStrings = {"数据库","数据库*"};
+		String [] queryStrings = {"有关数据库","有关数据库*"};
 		String [] fields = {"title","abs"};
 		String indexPath = "D:\\index1";
 		

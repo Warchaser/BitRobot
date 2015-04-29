@@ -4,11 +4,21 @@
   <servlet>
     <servlet-name>SendQuery</servlet-name>
     <servlet-class>servlet.SendQuery</servlet-class>
+    <!-- <load-on-startup>1</load-on-startup>  -->
   </servlet>
+  <servlet>
+    <servlet-name>LoadExpertListOnInit</servlet-name>
+    <servlet-class>servlet.LoadExpertListOnInit</servlet-class>
+  </servlet>
+
 
   <servlet-mapping>
     <servlet-name>SendQuery</servlet-name>
     <url-pattern>/servlet/SendQuery</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>LoadExpertListOnInit</servlet-name>
+    <url-pattern>/servlet/LoadExpertListOnInit</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>
