@@ -76,7 +76,7 @@ html, body {
 	margin-left:130px;
     font-size: 30px;
     display: inline-block;
-    font-family: "Consolas", "Monaco", "Bitstream Vera Sans Mono", "Courier New", Courier, monospace;
+    font-family: "Consolas", "Monaco", "Bitstream Vera Sans Mono", "Courier New"," Courier, monospace";
     color: #FFFFFF;
 }
 
