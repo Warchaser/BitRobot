@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import util.SearchLogic;
@@ -104,13 +107,9 @@ public class LoadExpertListOnInit extends HttpServlet {
 //		out.flush();
 //		out.close();
 		
-		System.out.println("This is the LoadExpertListOnInit.java!!!!");
-		
 		//指定前后台的输入输出字符集均为utf-8
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		
-		JSONObject jsonObject = new JSONObject();
 		
 		HttpSession session = request.getSession();
 		
@@ -119,7 +118,13 @@ public class LoadExpertListOnInit extends HttpServlet {
 		SearchLogic search = new SearchLogic();
 		ResultSet rs = search.getResult("select * from info");
 		
+		if(null == rs){
+			response.getWriter().print("0");
+		}
+		
 		Map<String,ExpertInfoBean> map = new HashMap<String,ExpertInfoBean>();
+		
+		List<String> expertList = new ArrayList<String>();
 		
 		ExpertInfoBean bean = null;
 		
@@ -140,6 +145,8 @@ public class LoadExpertListOnInit extends HttpServlet {
 				bean.setOrg(rs.getString("org"));
 				
 				map.put(bean.getExpertName(), bean);
+				
+				expertList.add(bean.getExpertName());
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -150,9 +157,7 @@ public class LoadExpertListOnInit extends HttpServlet {
 		
 		application.setAttribute("listMap", map);
 		
-//		jsonObject.put("expertList", );
-		
-		response.getWriter().print(jsonObject);
+		response.getWriter().print(expertList);
 		
 	}
 

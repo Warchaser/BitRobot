@@ -32,6 +32,10 @@ import org.apache.lucene.search.TopDocs;
 import bean.SearchBean;
 import dbtools.DBConnectionProperties;
 
+
+/**
+ * ik分词及lucence索引的类
+ * */
 public class SearchLogic{
 	
 	public ResultSet getResult(String sql){  

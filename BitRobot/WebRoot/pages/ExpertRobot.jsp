@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
@@ -11,15 +10,14 @@
 	</head>
 	<body onLoad="loadExpertList()">
 		<div class="mainDiv">
-			<div class="leftDiv" >
-					<span>
-						<h3>Expert List</h3>
-					</span>
-					<div class="showDiv" id="onlineDiv">
-						<ul>
-							<li><div><label>所有人</label><label>（聊天对象）</label></div></li>
-						</ul>
-					</div>
+			<div class="leftDiv">
+				<span>
+					<h3>Expert List</h3>
+				</span>
+				<div class="showDiv" id="expertDiv">
+	                <ul>
+	                </ul>
+				</div>
 			</div>
 			<div class="rightDiv">
 				<div class="righttopDiv">

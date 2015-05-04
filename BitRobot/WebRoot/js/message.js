@@ -28,25 +28,23 @@ $(function () {
     
 });
 
-function loadExpertList() {   //像服务器发送新的消息
-	
-	console.log("loadExpertList");
-	
+function loadExpertList() {   //获取专家列表并将列表放到leftDiv上
     $.ajax({
         type: "post",
         cache: false,
         url: "servlet/LoadExpertListOnInit",
-//        data: "content=" + content + "sender=" + sender,
-        data: "",
-        dataType:"json",
         success: function (data) {
-//            if (1 == data.sendResult) {
-//            	addNewMsgByServer(data.sendTime,data.content);
-//                $("#messageSpan").html("已发送").fadeOut(2000);
-//            }
-//            else {
-//                $("#messageSpan").html("发送失败").fadeOut(2000);
-//            }
+
+        	var experts = data.substring(1, data.length - 1).split(",");
+        	
+        	var ul = $(".mainDiv .leftDiv #expertDiv ul");
+        	
+        	for (var index = 0; experts.length > index; index++) {
+        		
+                ul.append("<li><div><label>" + experts[index] + "</label></div></li>");
+                
+            }
+        	
         },
         error: function () {
 //            alert("服务器连接错误");
@@ -63,7 +61,6 @@ function sendMessage(content) {   //像服务器发送新的消息
         type: "post",
         cache: false,
         url: "servlet/SendQuery",
-//        data: "content=" + content + "sender=" + sender,
         data: "content=" + content,
         dataType:"json",
         success: function (data) {

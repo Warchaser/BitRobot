@@ -136,7 +136,6 @@ html, body {
 .mainDiv .leftDiv .showDiv::-webkit-scrollbar-track, .mainDiv .rightDiv .righttopDiv .showDiv::-webkit-scrollbar-track, .mainDiv .rightDiv.rightbottomDiv .contentText::-webkit-scrollbar-track {
     border-radius: 10px;
     background-color: #FFD6B9;
-
 }
 
 .mainDiv .leftDiv .showDiv::-webkit-scrollbar-thumb, .mainDiv .rightDiv .righttopDiv .showDiv::-webkit-scrollbar-thumb, .mainDiv .rightDiv.rightbottomDiv .contentText::-webkit-scrollbar-thumb {
@@ -234,9 +233,7 @@ html, body {
 	background:rgba(118, 134, 255, 0.4);
 	border-radius:5px; /* Ô²½Ç */
 	margin:30px auto 0;
-	
 	padding:10px;
-	
 	margin-top:10px;
 	font-size: 20px;
 	display: inline-block;
@@ -266,7 +263,7 @@ html, body {
 	height:0;
 	font-size:0;
 	border:solid 8px;
-	border-color:  transparent rgba(118, 134, 255, 0.4) transparent  transparent;
+	border-color:transparent rgba(118, 134, 255, 0.4) transparent  transparent;
 }
 
 
