@@ -16,7 +16,7 @@ $(function () {
     $(document).on("click", ".mainDiv .leftDiv #expertDiv ul li div", function () {
 //    	var expertName = $(".mainDiv .leftDiv #expertDiv ul li div label").html();//获取标签内的值
     	
-    	var width = 600;
+    	var width = 900;
     	var height = 600;
     	
     	var left = (screen.width-width)/2;
