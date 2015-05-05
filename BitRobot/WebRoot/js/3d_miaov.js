@@ -37,10 +37,22 @@ window.onload=function ()
         	var relationship = data.substring(1, data.length - 1).split(",");
         	
         	var div = $("#div1");
+        
+        	var addimg = "<img style=\" width:70px; height:70px; border-radius:50px; \"  src=\"images/moren-man.jpg\"/>";
+        	
+        	var kongge = "&nbsp;";
+        	
+        	var huanhang = "<br>";
+        	
+        	var guanxi = "<font size = 2>--同事</font>";
+        	
+        	var size1 = "<font size = 2>";
+        	
+        	var size2 = "</font>";
         	
         	for (var index = 0; relationship.length > index; index++) {
         		
-        		div.append("<a>" + relationship[index] + "</a>");
+        		div.append("<a>" + addimg + huanhang +  size1 + relationship[index] + size2 + guanxi + "</a>");
                 
             }
         	
@@ -161,8 +173,8 @@ function update()
 	}
 	else
 	{
-		a = lasta * 0.98;
-		b = lastb * 0.98;
+		a = lasta * 0.9;
+		b = lastb * 0.9;
 	}
 	
 	lasta=a;
