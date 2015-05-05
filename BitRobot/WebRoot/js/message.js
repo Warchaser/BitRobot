@@ -10,13 +10,15 @@ $(function () {
             return;
         }
 
-//        var preContent = "<pre>" + content + "</pre>";
         sendMessage(content);
     });
 
-    $(document).on("click", ".mainDiv .rightDiv .righttopDiv #onlineDiv ul li div", function () {
-        $(".mainDiv .rightDiv .righttopDiv #onlineDiv ul li div:contains('聊天对象') label:last").remove();
-        $(this).append("<label>  (聊天对象)</label>");
+    $(document).on("click", ".mainDiv .leftDiv #expertDiv ul li div", function () {
+    	var expertName = $(".mainDiv .leftDiv #expertDiv ul li div");//获取标签内的值
+        console.log("孟小峰");
+        
+        window.open("pages/relationship.jsp?expertName=" + "孟小峰");
+        
     });
 
    

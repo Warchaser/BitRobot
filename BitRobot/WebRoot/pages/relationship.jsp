@@ -9,18 +9,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'index.jsp' starting page</title>
+    <title>关系视图</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+	<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+	<script type="text/javascript" src="js/miaov.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/miaov_style.css"/>
   </head>
   
   <body>
-    This is my JSP page. <br>
+    <div id="main" class="main">
+	<div id="div2"> <img style=" width:50px; height:50px; border-radius:50px; margin-top:20%;  margin-left:45%; "  src="images/avatar.jpg"/></div>
+	<div id="div1">
+	</div>
+	</div>
   </body>
 </html>

@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,26 +16,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
 import util.SearchLogic;
 import bean.ExpertInfoBean;
-
+import bean.RelationshipBean;
 
 /**
- * 此类是用来获取数据库中专家列表的专家的各种信息，
- * 并放入application
+ * 获取专家的关系图用的数据的servlet
  * */
-public class LoadExpertListOnInit extends HttpServlet {
+
+public class GetRelationshipServlet extends HttpServlet {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8935146699676922497L;
+	private static final long serialVersionUID = -5492901695561709870L;
 
 	/**
 	 * Constructor of the object.
 	 */
-	public LoadExpertListOnInit() {
+	public GetRelationshipServlet() {
 		super();
 	}
 
@@ -72,8 +72,6 @@ public class LoadExpertListOnInit extends HttpServlet {
 //		out.println("</HTML>");
 //		out.flush();
 //		out.close();
-		
-		doPost(request,response);
 	}
 
 	/**
@@ -89,60 +87,60 @@ public class LoadExpertListOnInit extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-//		response.setContentType("text/html");
-//		PrintWriter out = response.getWriter();
-//		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-//		out.println("<HTML>");
-//		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-//		out.println("  <BODY>");
-//		out.print("    This is ");
-//		out.print(this.getClass());
-//		out.println(", using the POST method");
-//		out.println("  </BODY>");
-//		out.println("</HTML>");
-//		out.flush();
-//		out.close();
-		
 		//指定前后台的输入输出字符集均为utf-8
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		
+		//获取application中的键值对应的对象
 		HttpSession session = request.getSession();
 		
 		ServletContext application = session.getServletContext();
-				
-		SearchLogic search = new SearchLogic();
-		ResultSet rs = search.getResult("select * from info");
 		
-		if(null == rs){
-			response.getWriter().print("0");
-		}
+		Map<String,RelationshipBean> relationMap = new HashMap<String,RelationshipBean>();
+		
+		List<String> list = new ArrayList<String>();
+		
+//		if(null == application.getAttribute("relationShipList")){
+//			relationMap = new HashMap<String,RelationshipBean>();
+//		}
+//		else{
+//			relationMap = (Map<String, RelationshipBean>) application.getAttribute("relationShipList");
+//		}
+		
+		String expertName = request.getParameter("expertName");
+		
+		int expertId = 0;
 		
 		Map<String,ExpertInfoBean> map = new HashMap<String,ExpertInfoBean>();
 		
-		List<String> expertList = new ArrayList<String>();
+		map = (Map<String, ExpertInfoBean>) application.getAttribute("listMap");
 		
-		ExpertInfoBean bean = null;
+		ExpertInfoBean bean = new ExpertInfoBean();
+		
+		bean = map.get(expertName);
+		
+		expertId = bean.getExpertId();
+		//////////////////////////////////////////////////////////
+		SearchLogic search = new SearchLogic();
+		ResultSet rs = search.getResult("select * from relationship where expert_id like " 
+						+ expertId + " limit " + 10);
+		
+		RelationshipBean relationshipBean = null;
 		
 		try {
 			while(rs.next()){
 				
-				bean = new ExpertInfoBean();
-				bean.setExpertId(rs.getInt("Id"));
-				bean.setExpertName(rs.getString("expert_name"));
-				bean.setBirth_death(rs.getString("birth_death"));
-				bean.setJob_position(rs.getString("job_position"));
-				bean.setProject(rs.getString("project"));
-				bean.setCount_reward(rs.getInt("count_reward"));
-				bean.setCount_paper(rs.getInt("count_paper"));
-				bean.setCount_patent(rs.getInt("count_patent"));
-				bean.setEmployment_direction(rs.getString("employment_direction"));
-				bean.setGender(rs.getString("gender"));
-				bean.setOrg(rs.getString("org"));
+				relationshipBean = new RelationshipBean();
 				
-				map.put(bean.getExpertName(), bean);
+				relationshipBean.setExpertId(expertId);
+				relationshipBean.setExpertName(expertName);
+				relationshipBean.setName(rs.getString("name"));
+				relationshipBean.setRelationshipType(rs.getString("relationship_type"));
+				relationshipBean.setR_beizhu(rs.getString("r_beizhu"));
 				
-				expertList.add(bean.getExpertName());
+				relationMap.put(expertName, relationshipBean);
+				
+				list.add(relationshipBean.getName());
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -151,10 +149,10 @@ public class LoadExpertListOnInit extends HttpServlet {
 		
 		search.closeBD();
 		
-		application.setAttribute("listMap", map);
+		application.setAttribute("relationShipList", map);
 		
-		response.getWriter().print(expertList);
-		
+		response.getWriter().print(list);
+
 	}
 
 	/**

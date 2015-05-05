@@ -10,6 +10,11 @@
     <servlet-name>LoadExpertListOnInit</servlet-name>
     <servlet-class>servlet.LoadExpertListOnInit</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>GetRelationshipServlet</servlet-name>
+    <servlet-class>servlet.GetRelationshipServlet</servlet-class>
+  </servlet>
+
 
 
   <servlet-mapping>
@@ -19,6 +24,10 @@
   <servlet-mapping>
     <servlet-name>LoadExpertListOnInit</servlet-name>
     <url-pattern>/servlet/LoadExpertListOnInit</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>GetRelationshipServlet</servlet-name>
+    <url-pattern>/servlet/GetRelationshipServlet</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>
