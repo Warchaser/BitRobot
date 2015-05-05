@@ -20,49 +20,133 @@ var oDiv=null;
 
 window.onload=function ()
 {
-	var i=0;
-	var oTag=null;
+	//////////////////////////////////
 	
-	oDiv=document.getElementById('div1');
+	/*生成页面标签部分*/
 	
-	aA=oDiv.getElementsByTagName('a');
+	var tmps=window.location.href.split("?")[1]; //我分
+	var expertName=tmps.split("=")[1]; //我得到expertName
 	
-	for(i=0;i<aA.length;i++)
-	{
-		oTag={};
-		
-		oTag.offsetWidth=aA[i].offsetWidth;
-		oTag.offsetHeight=aA[i].offsetHeight;
-		
-		mcList.push(oTag);
-	}
+	$.ajax({
+        type: "post",
+        cache: false,
+        url: "servlet/GetRelationshipServlet",
+        data: "expertName=" + expertName,
+        success: function (data) {
+        	
+        	var relationship = data.substring(1, data.length - 1).split(",");
+        	
+        	var div = $("#div1");
+        	
+        	for (var index = 0; relationship.length > index; index++) {
+        		
+        		div.append("<a>" + relationship[index] + "</a>");
+                
+            }
+        	
+        	var i=0;
+        	var oTag=null;
+        	
+        	oDiv=document.getElementById('div1');
+        	
+        	aA=oDiv.getElementsByTagName('a');
+        	
+        	for(i=0;i<aA.length;i++)
+        	{
+        		oTag={};
+        		
+        		oTag.offsetWidth=aA[i].offsetWidth;
+        		oTag.offsetHeight=aA[i].offsetHeight;
+        		
+        		mcList.push(oTag);
+        	}
+        	
+        	sineCosine( 0,0,0 );
+        	
+        	positionAll();
+        	
+        	oDiv.onmouseover=function ()
+        	{
+        		active=false;
+        	};
+        	
+        	oDiv.onmouseout=function ()
+        	{
+        		active=true;
+        	};
+        	
+        	oDiv.onmousemove=function (ev)
+        	{
+        		var oEvent=window.event || ev;
+        		
+        		mouseX=oEvent.clientX-(oDiv.offsetLeft+oDiv.offsetWidth/2);
+        		mouseY=oEvent.clientY-(oDiv.offsetTop+oDiv.offsetHeight/2);
+        		
+        		mouseX/=5;    //控制旋转速度
+        		mouseY/=5;
+        	};
+        	
+        	setInterval(update, 50);
+        	
+//            if (1 == data.sendResult) {
+//            	addNewMsgByServer(data.sendTime,data.content);
+//                $("#messageSpan").html("已发送").fadeOut(2000);
+//            }
+//            else {
+//                $("#messageSpan").html("发送失败").fadeOut(2000);
+//            }
+        },
+        error: function () {
+//            alert("服务器连接错误");
+//            $("#messageSpan").html("发送失败").fadeOut(2000);
+        }
+    });
 	
-	sineCosine( 0,0,0 );
+	//////////////////////////////////
 	
-	positionAll();
-	
-	oDiv.onmouseover=function ()
-	{
-		active=false;
-	};
-	
-	oDiv.onmouseout=function ()
-	{
-		active=true;
-	};
-	
-	oDiv.onmousemove=function (ev)
-	{
-		var oEvent=window.event || ev;
-		
-		mouseX=oEvent.clientX-(oDiv.offsetLeft+oDiv.offsetWidth/2);
-		mouseY=oEvent.clientY-(oDiv.offsetTop+oDiv.offsetHeight/2);
-		
-		mouseX/=5;    //������ת�ٶ�
-		mouseY/=5;
-	};
-	
-	setInterval(update, 50);
+//	var i=0;
+//	var oTag=null;
+//	
+//	oDiv=document.getElementById('div1');
+//	
+//	aA=oDiv.getElementsByTagName('a');
+//	
+//	for(i=0;i<aA.length;i++)
+//	{
+//		oTag={};
+//		
+//		oTag.offsetWidth=aA[i].offsetWidth;
+//		oTag.offsetHeight=aA[i].offsetHeight;
+//		
+//		mcList.push(oTag);
+//	}
+//	
+//	sineCosine( 0,0,0 );
+//	
+//	positionAll();
+//	
+//	oDiv.onmouseover=function ()
+//	{
+//		active=false;
+//	};
+//	
+//	oDiv.onmouseout=function ()
+//	{
+//		active=true;
+//	};
+//	
+//	oDiv.onmousemove=function (ev)
+//	{
+//		var oEvent=window.event || ev;
+//		
+//		mouseX=oEvent.clientX-(oDiv.offsetLeft+oDiv.offsetWidth/2);
+//		mouseY=oEvent.clientY-(oDiv.offsetTop+oDiv.offsetHeight/2);
+//		
+//		mouseX/=5;    //控制旋转速度
+//		mouseY/=5;
+//	};
+//	
+//	setInterval(update, 50);
 };
 
 function update()
@@ -168,7 +252,7 @@ function positionAll()
 	var aTmp=[];
 	var oFragment=document.createDocumentFragment();
 	
-	//�������
+	//随机排序
 	for(i=0;i<aA.length;i++)
 	{
 		aTmp.push(aA[i]);
@@ -200,7 +284,7 @@ function positionAll()
 			phi = Math.random()*(Math.PI);
 			theta = Math.random()*(2*Math.PI);
 		}
-		//����任
+		//坐标变换
 		mcList[i-1].cx = radius * Math.cos(theta)*Math.sin(phi);
 		mcList[i-1].cy = radius * Math.sin(theta)*Math.sin(phi);
 		mcList[i-1].cz = radius * Math.cos(phi);
