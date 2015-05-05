@@ -107,7 +107,7 @@ public class GetRelationshipServlet extends HttpServlet {
 //			relationMap = (Map<String, RelationshipBean>) application.getAttribute("relationShipList");
 //		}
 		
-		String expertName = request.getParameter("expertName");
+		String expertName = request.getParameter("expertName").trim();
 		
 		int expertId = 0;
 		
