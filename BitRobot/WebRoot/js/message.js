@@ -14,10 +14,17 @@ $(function () {
     });
 
     $(document).on("click", ".mainDiv .leftDiv #expertDiv ul li div", function () {
-    	var expertName = $(".mainDiv .leftDiv #expertDiv ul li div");//获取标签内的值
-        console.log("孟小峰");
-        
-        window.open("pages/relationship.jsp?expertName=" + "孟小峰");
+//    	var expertName = $(".mainDiv .leftDiv #expertDiv ul li div label").html();//获取标签内的值
+    	
+    	var width = 600;
+    	var height = 600;
+    	
+    	var left = (screen.width-width)/2;
+    	var top = (screen.height-height)/2;
+    	
+    	var expertName = $(this).text();
+    	
+        window.open("pages/relationship.jsp?expertName=" + expertName,expertName,"left=" +left+",top="+top+",width="+width+",height="+height);
         
     });
 
