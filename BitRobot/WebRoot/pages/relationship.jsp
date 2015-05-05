@@ -16,8 +16,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
-	<script type="text/javascript" src="js/miaov.js"></script>
-	<link rel="stylesheet" type="text/css" href="css/miaov_style.css"/>
+	<script type="text/javascript" src="js/3d_miaov.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/3d_miaov_style.css"/>
   </head>
   
   <body>
