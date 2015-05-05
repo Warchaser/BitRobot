@@ -28,14 +28,20 @@ public class DBConnectionProperties {
     private static Statement stmt;
     
     private static ResultSet rs;
-      
+    
+    /**
+     * 从配置文件test.properties中获取连接数据库的参数
+     * */
     static {  
         URL = PropertiesUtil.getPropertyValue("jdbc.url");  
         JDBC_DRIVER = PropertiesUtil.getPropertyValue("jdbc.driverClassName");  
         USER_NAME = PropertiesUtil.getPropertyValue("jdbc.username");  
         PASSWORD = PropertiesUtil.getPropertyValue("jdbc.password");  
     }  
-      
+    
+    /**
+     * 连接数据库
+     * */
     public static Connection getConnection() {  
         try {  
             Class.forName(JDBC_DRIVER);  
@@ -68,6 +74,9 @@ public class DBConnectionProperties {
 
 	}
 	
+	/**
+	 * 关闭连接（数据库和状态集）
+	 * */
 	public static void close(){
 		try {
 			if(stmt != null){

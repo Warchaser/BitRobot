@@ -1,16 +1,39 @@
 package bean;
 
-public class SearchBean {
-	private String title;
+/**
+ * 搜索用的bean
+ * */
 
+public class SearchBean {
+	
+	/**
+	 * 文章标题
+	 * */
+	private String title;
+	
+	/**
+	 * 文章摘要
+	 * */
 	private String abs;
 	
+	/**
+	 * 文章链接
+	 * */
 	private String url;
 	
+	/**
+	 * 发布日期
+	 * */
 	private String date;
 	
+	/**
+	 * 专家姓名
+	 * */
 	private String expert_nmae;
 	
+	/**
+	 * 专家所在机构
+	 * */
 	private String expert_org;
 
 	public SearchBean(){

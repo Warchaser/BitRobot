@@ -13,8 +13,7 @@ $(function () {
         sendMessage(content);
     });
 
-    $(document).on("click", ".mainDiv .leftDiv #expertDiv ul li div", function () {
-//    	var expertName = $(".mainDiv .leftDiv #expertDiv ul li div label").html();//获取标签内的值
+    $(document).on("click", ".mainDiv .leftDiv #expertDiv ul li div", function () {//专家列表点击事件
     	
     	var width = 900;
     	var height = 600;
@@ -88,7 +87,7 @@ function sendMessage(content) {   //像服务器发送新的消息
     });
 }
 
-function addNewMsgByServer(sendTime,content) {
+function addNewMsgByServer(sendTime,content) {//从服务器传回来的消息，并格式化
     var messageDiv = $("#messageDiv");
     var newDiv = "<div style=\"float: left; display: block; clear:both;\"> <img style=\" float:left; width:50px; height:50px;   border-radius:50px; clear:both;\"  src=\"images/avatar.jpg\" /> </div>" +
      			   "<div class = \"send\"  style = \"float:left;  margin-left:20px;\">"+"<div class=\"arrowleft\"></div>" + "<h6>" + "</h6>";
@@ -99,7 +98,7 @@ function addNewMsgByServer(sendTime,content) {
     $(messageDiv).scrollTop($(messageDiv)[0].scrollHeight);
 };
 
-function addNewMsgRightByUser(content) {
+function addNewMsgRightByUser(content) {//由用户直接发布在网页上的消息，并格式化
     var messageDiv = $("#messageDiv");
     var newDiv = "<div style=\"float: right; display: block;clear:both;\"> <img style=\" float:right;  width:50px; height:50px;   border-radius:50px; \"  src=\"images/avatar.jpg\" /> </div>"+
     			 "<div class = \"send\" style = \"float:right; margin-right:20px;\" >"+"<div class=\"arrowright\"></div>" + "<h6>" + "</h6>";

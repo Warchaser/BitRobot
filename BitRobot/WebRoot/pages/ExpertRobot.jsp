@@ -12,7 +12,7 @@
 		<div class="mainDiv">
 			<div class="leftDiv">
 				<span>
-					<h3>Expert List</h3>
+					<h3>专家列表</h3>
 				</span>
 				<div class="showDiv" id="expertDiv">
 	                <ul>

@@ -38,6 +38,9 @@ import dbtools.DBConnectionProperties;
  * */
 public class SearchLogic{
 	
+	/**
+	 * 执行数据库查询
+	 * */
 	public ResultSet getResult(String sql){  
 		
 		if(null == DBConnectionProperties.getConnection()){
@@ -48,10 +51,16 @@ public class SearchLogic{
         
     }
 	
+	/**
+	 * 关闭数据库
+	 * */
 	public void closeBD(){
 		DBConnectionProperties.close();
 	}
 	
+	/**
+	 * 将数据库中查询获得结果创建索引
+	 * */
 	public void createIndex(ResultSet rs, String indexPath){
 		
 		File indexDir = new File(indexPath);
@@ -95,6 +104,9 @@ public class SearchLogic{
 		
 	}
 	
+	/**
+	 * 从索引中搜索并返回list
+	 * */
 	public List<SearchBean> searcher(String [] queryStrings, String [] fields, String indexPath){
 		ScoreDoc [] hits = null;
 		Query query = null;
