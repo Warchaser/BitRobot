@@ -15,9 +15,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import net.sf.json.JSONException;
+import net.sf.json.JSONObject;
 import bean.ExpertInfoBean;
 import bean.SearchBean;
 import util.SearchLogic;
@@ -141,11 +140,8 @@ public class SendQuery extends HttpServlet {
 			requestNum = listSize;
 		}
 
-		String expertName = "";
-
 		try {
 			if(null != map.get(content)){
-				expertName = map.get(content).getExpertName();
 		
 				contentTrans += "少侠是要问我的信息？</br>";
 				contentTrans += "我是" + content + ",";

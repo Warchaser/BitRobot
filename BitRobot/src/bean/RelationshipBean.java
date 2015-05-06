@@ -32,6 +32,11 @@ public class RelationshipBean {
 	 * */
 	private String r_beizhu;
 	
+	/**
+	 * 新加的关系类型
+	 * */
+	private String newType;
+	
 	public RelationshipBean(){
 		
 	}
@@ -74,6 +79,14 @@ public class RelationshipBean {
 
 	public void setR_beizhu(String r_beizhu) {
 		this.r_beizhu = r_beizhu;
+	}
+	
+	public String getNewType() {
+		return newType;
+	}
+
+	public void setNewType(String newType) {
+		this.newType = newType;
 	}
 
 }

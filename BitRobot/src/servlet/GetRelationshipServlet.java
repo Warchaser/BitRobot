@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import net.sf.json.JSONArray;
 import util.SearchLogic;
 import bean.ExpertInfoBean;
 import bean.RelationshipBean;
@@ -98,7 +99,7 @@ public class GetRelationshipServlet extends HttpServlet {
 		
 		Map<String,RelationshipBean> relationMap = new HashMap<String,RelationshipBean>();
 		
-		List<String> list = new ArrayList<String>();
+		List<RelationshipBean> listJson = new ArrayList<RelationshipBean>(); 
 		
 //		if(null == application.getAttribute("relationShipList")){
 //			relationMap = new HashMap<String,RelationshipBean>();
@@ -137,10 +138,11 @@ public class GetRelationshipServlet extends HttpServlet {
 				relationshipBean.setName(rs.getString("name"));
 				relationshipBean.setRelationshipType(rs.getString("relationship_type"));
 				relationshipBean.setR_beizhu(rs.getString("r_beizhu"));
+				relationshipBean.setNewType(rs.getString("newtype"));
 				
 				relationMap.put(expertName, relationshipBean);
 				
-				list.add(relationshipBean.getName());
+				listJson.add(relationshipBean);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -151,7 +153,9 @@ public class GetRelationshipServlet extends HttpServlet {
 		
 		application.setAttribute("relationShipList", map);
 		
-		response.getWriter().print(list);
+		JSONArray json = JSONArray.fromObject(listJson);
+		
+		response.getWriter().print(json.toString());
 
 	}
 

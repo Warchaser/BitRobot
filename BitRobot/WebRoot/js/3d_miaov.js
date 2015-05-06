@@ -34,7 +34,7 @@ window.onload=function ()
         data: "expertName=" + expertName,
         success: function (data) {
         	
-        	var relationship = data.substring(1, data.length - 1).split(",");
+//        	var relationship = data.substring(1, data.length - 1).split(",");
         	
         	var div = $("#div1");
         
@@ -44,17 +44,16 @@ window.onload=function ()
         	
         	var huanhang = "<br>";
         	
-        	var guanxi = "<font size = 2>--同事</font>";
-        	
         	var size1 = "<font size = 2>";
         	
         	var size2 = "</font>";
         	
-        	for (var index = 0; relationship.length > index; index++) {
-        		
-        		div.append("<a>" + addimg + huanhang +  size1 + relationship[index] + size2 + guanxi + "</a>");
-                
-            }
+        	var relationshipList = eval("("+data+")");
+        	
+        	for(var i = 0; i < relationshipList.length; i++){
+        		var inner = relationshipList[i];
+        		div.append("<a>" + addimg + huanhang +  size1 + inner.name + size2 + "--" + inner.newType + "</a>");
+        	}
         	
         	var i=0;
         	var oTag=null;
