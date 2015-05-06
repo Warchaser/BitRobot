@@ -36,7 +36,9 @@ window.onload=function ()
         	
         	var div = $("#div1");
         
-        	var addimg = "<img style=\" width:70px; height:70px; border-radius:50px; \"  src=\"images/moren-man.jpg\"/>";
+        	var addimgman = "<img style=\" width:70px; height:70px; border-radius:50px; \"  src=\"images/moren-man.jpg\"/>";
+        	
+        	var addimgwom = "<img style=\" width:70px; height:70px; border-radius:50px; \"  src=\"images/moren-woman.jpg\"/>";
         	
         	var kongge = "&nbsp;";
         	
@@ -50,7 +52,15 @@ window.onload=function ()
         	
         	for(var i = 0; i < relationshipList.length; i++){
         		var inner = relationshipList[i];
-        		div.append("<a>" + addimg + huanhang +  size1 + inner.name + size2 + "--" + inner.newType + "</a>");
+        		 
+        		
+        		 
+        		if(inner.sex == "男"){
+        			div.append("<a>" + addimgman + huanhang +  size1 + inner.name + size2 + "--" + size1 + inner.newType + size2 + "</a>");
+        		}
+        		else{
+        			div.append("<a>" + addimgwom + huanhang +  size1 + inner.name + size2 + "--" + size1 + inner.newType + size2 + "</a>");
+        		}
         	}
         	
         	var i=0;

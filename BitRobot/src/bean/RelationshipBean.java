@@ -37,6 +37,14 @@ public class RelationshipBean {
 	 * */
 	private String newType;
 	
+	
+	/**
+	 * 新加的性别
+	 * */
+	private String Sex;
+	
+
+
 	public RelationshipBean(){
 		
 	}
@@ -87,6 +95,14 @@ public class RelationshipBean {
 
 	public void setNewType(String newType) {
 		this.newType = newType;
+	}
+	
+	public String getSex() {
+		return Sex;
+	}
+
+	public void setSex(String sex) {
+		Sex = sex;
 	}
 
 }

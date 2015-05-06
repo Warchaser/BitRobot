@@ -139,7 +139,7 @@ public class GetRelationshipServlet extends HttpServlet {
 				relationshipBean.setRelationshipType(rs.getString("relationship_type"));
 				relationshipBean.setR_beizhu(rs.getString("r_beizhu"));
 				relationshipBean.setNewType(rs.getString("newtype"));
-				
+				relationshipBean.setSex(rs.getString("Sex"));
 				relationMap.put(expertName, relationshipBean);
 				
 				listJson.add(relationshipBean);
