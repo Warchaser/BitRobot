@@ -34,8 +34,6 @@ window.onload=function ()
         data: "expertName=" + expertName,
         success: function (data) {
         	
-//        	var relationship = data.substring(1, data.length - 1).split(",");
-        	
         	var div = $("#div1");
         
         	var addimg = "<img style=\" width:70px; height:70px; border-radius:50px; \"  src=\"images/moren-man.jpg\"/>";
