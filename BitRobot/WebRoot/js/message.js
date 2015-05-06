@@ -21,7 +21,7 @@ $(function () {
     	var left = (screen.width-width)/2;
     	var top = (screen.height-height)/2;
     	
-    	var expertName = $(this).text();
+    	var expertName = $.trim((this).text());
     	
         window.open("pages/relationship.jsp?expertName=" + expertName,expertName,"left=" +left+",top="+top+",width="+width+",height="+height);
         
