@@ -50,8 +50,6 @@ html, body {
     padding: 5px;
     font-size: 14px;
     overflow-y: scroll;
-    scrollbar-track-color: #FFD6B9;
-    scrollbar-base-color: lightblue;
     border-radius: 10px;
 }
 
@@ -65,11 +63,33 @@ html, body {
     height: 80%;
     padding: 5px;
     font-size: 14px;
-    overflow-y: scroll;
-    scrollbar-track-color: #FFD6B9;
-    scrollbar-base-color: lightblue;
+	overflow-y:scroll;
+
+    
 
 }
+
+.mainDiv .leftDiv .showDiv::-webkit-scrollbar, .mainDiv .rightDiv .righttopDiv .showDiv::-webkit-scrollbar, .mainDiv .rightDiv.rightbottomDiv .contentText::-webkit-scrollbar {
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.mainDiv .leftDiv .showDiv::-webkit-scrollbar-track, .mainDiv .rightDiv .righttopDiv .showDiv::-webkit-scrollbar-track, .mainDiv .rightDiv.rightbottomDiv .contentText::-webkit-scrollbar-track {
+ 
+     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    border:1px solid #666666
+}
+
+.mainDiv .leftDiv .showDiv::-webkit-scrollbar-thumb, .mainDiv .rightDiv .righttopDiv .showDiv::-webkit-scrollbar-thumb, .mainDiv .rightDiv.rightbottomDiv .contentText::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(150,150,150,0.8); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+
 
 .mainDiv .leftDiv span h3 {
 	margin-top:10px;
@@ -103,6 +123,7 @@ html, body {
     display: inline-block;
     font-family: "Courier New";
     color: #FFA;
+   
 }
 
 .mainDiv .rightDiv #messageDiv div h6{
@@ -127,22 +148,7 @@ html, body {
     color: #FFA;
 }
 
-.mainDiv .leftDiv .showDiv::-webkit-scrollbar, .mainDiv .rightDiv .righttopDiv .showDiv::-webkit-scrollbar, .mainDiv .rightDiv.rightbottomDiv .contentText::-webkit-scrollbar {
-    border-radius: 10px;
-    background-color: #F5F5F5;
 
-}
-
-.mainDiv .leftDiv .showDiv::-webkit-scrollbar-track, .mainDiv .rightDiv .righttopDiv .showDiv::-webkit-scrollbar-track, .mainDiv .rightDiv.rightbottomDiv .contentText::-webkit-scrollbar-track {
-    border-radius: 10px;
-    background-color: #FFD6B9;
-}
-
-.mainDiv .leftDiv .showDiv::-webkit-scrollbar-thumb, .mainDiv .rightDiv .righttopDiv .showDiv::-webkit-scrollbar-thumb, .mainDiv .rightDiv.rightbottomDiv .contentText::-webkit-scrollbar-thumb {
-    border-radius: 5px;
-    background-color: lightblue;
-
-}
 
 .mainDiv .leftDiv .showDiv ul{
     text-decoration: none;
@@ -150,19 +156,23 @@ html, body {
 }
 
 .mainDiv .leftDiv .showDiv ul li div{
-    font-size:25px;
-    font-family: "Courier New";
-    color:#FFA;
-    border-radius:5px;
+    font-size:30px;
+    font-family: "KaiTi";
+    font-weight: bold;
+   color:#000088;
+	text-align:center;
+    border-radius:10px;
 }
 
 .mainDiv .leftDiv .showDiv ul li div label{
-    font-size:17px;
+    font-size:20px;
+  
     color:#00000;
 }
 
 .mainDiv .leftDiv .showDiv ul li div:hover, .mainDiv .leftDiv #messageDiv div:hover{
-    background:#76B6FF;
+    background:#F2F1D7;
+    color:#E63F00 ;
 }
 
 
@@ -265,6 +275,8 @@ html, body {
 	border:solid 8px;
 	border-color:transparent rgba(118, 134, 255, 0.4) transparent  transparent;
 }
+
+
 
 
 
