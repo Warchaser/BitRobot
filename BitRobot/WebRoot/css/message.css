@@ -152,22 +152,24 @@ html, body {
 
 .mainDiv .leftDiv .showDiv ul{
     text-decoration: none;
-
+	 
 }
 
 .mainDiv .leftDiv .showDiv ul li div{
-    font-size:30px;
+    font-size:40px;
     font-family: "KaiTi";
     font-weight: bold;
-   color:#000088;
-	text-align:center;
+    color:#000088;
     border-radius:10px;
+    text-aglin:center;
+    margin-top:10px;
+  
 }
 
 .mainDiv .leftDiv .showDiv ul li div label{
     font-size:20px;
-  
     color:#00000;
+ 
 }
 
 .mainDiv .leftDiv .showDiv ul li div:hover, .mainDiv .leftDiv #messageDiv div:hover{
@@ -195,13 +197,14 @@ html, body {
 
 .mainDiv .rightDiv .rightbottomDiv .sendButton {
     height: 75px;
-    width: 75px;
+    width: 150px;
     vertical-align: middle;
 	margin-left : 40px;
 	margin-top : 10px;
     border: 0px;
-    border-radius: 50px;
-    background-color: #5AB;
+    border-radius: 10px;
+   
+    background: rgb(114,128,226);
     float: left;
     font-size: 20px;
     color: #FFA;
@@ -215,8 +218,9 @@ html, body {
 
 
 .mainDiv .rightDiv .rightbottomDiv .sendButton:hover, .mainDiv  .rightDiv .righttopDiv span .exitButton:hover {
-    background: #FAC;
-    border-radius: 25px;
+  
+    background-color: rgb(104,236,111);
+    border-radius: 10px;
 }
 
 .mainDiv .rightDiv .rightbottomDiv .sendButton:focus, .mainDiv  .rightDiv .righttopDiv span .exitButton:focus {

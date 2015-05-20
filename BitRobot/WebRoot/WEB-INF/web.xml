@@ -14,6 +14,31 @@
     <servlet-name>GetRelationshipServlet</servlet-name>
     <servlet-class>servlet.GetRelationshipServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>AdminAddExpertInfo</servlet-name>
+    <servlet-class>servlet.AdminAddExpertInfo</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AdminAddExpertPatent</servlet-name>
+    <servlet-class>servlet.AdminAddExpertPatent</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AdminAddExpertReward</servlet-name>
+    <servlet-class>servlet.AdminAddExpertReward</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AdminAddExpertRelationship</servlet-name>
+    <servlet-class>servlet.AdminAddExpertRelationship</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AdminAddExpertPaper</servlet-name>
+    <servlet-class>servlet.AdminAddExpertPaper</servlet-class>
+  </servlet>
+
+
+
+
+
 
 
 
@@ -28,6 +53,26 @@
   <servlet-mapping>
     <servlet-name>GetRelationshipServlet</servlet-name>
     <url-pattern>/servlet/GetRelationshipServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminAddExpertInfo</servlet-name>
+    <url-pattern>/servlet/AdminAddExpertInfo</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminAddExpertPatent</servlet-name>
+    <url-pattern>/servlet/AdminAddExpertPatent</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminAddExpertReward</servlet-name>
+    <url-pattern>/servlet/AdminAddExpertReward</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminAddExpertRelationship</servlet-name>
+    <url-pattern>/servlet/AdminAddExpertRelationship</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminAddExpertPaper</servlet-name>
+    <url-pattern>/servlet/AdminAddExpertPaper</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>

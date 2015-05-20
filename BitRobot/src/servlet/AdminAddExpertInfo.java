@@ -3,41 +3,26 @@ package servlet;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
-
-
-import net.sf.json.JSONArray;
 import util.SearchLogic;
-import bean.ExpertInfoBean;
 
-
-/**
- * 此类是用来获取数据库中专家列表的专家的各种信息，
- * 并放入application
- * */
-public class LoadExpertListOnInit extends HttpServlet {
+public class AdminAddExpertInfo extends HttpServlet {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8935146699676922497L;
+	private static final long serialVersionUID = -1586463458712224395L;
 
 	/**
 	 * Constructor of the object.
 	 */
-	public LoadExpertListOnInit() {
+	public AdminAddExpertInfo() {
 		super();
 	}
 
@@ -75,8 +60,6 @@ public class LoadExpertListOnInit extends HttpServlet {
 //		out.println("</HTML>");
 //		out.flush();
 //		out.close();
-		
-		doPost(request,response);
 	}
 
 	/**
@@ -92,78 +75,51 @@ public class LoadExpertListOnInit extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-//		response.setContentType("text/html");
-//		PrintWriter out = response.getWriter();
-//		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
-//		out.println("<HTML>");
-//		out.println("  <HEAD><TITLE>A Servlet</TITLE></HEAD>");
-//		out.println("  <BODY>");
-//		out.print("    This is ");
-//		out.print(this.getClass());
-//		out.println(", using the POST method");
-//		out.println("  </BODY>");
-//		out.println("</HTML>");
-//		out.flush();
-//		out.close();
-		
 		//指定前后台的输入输出字符集均为utf-8
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		
+		//打开session
 		HttpSession session = request.getSession();
 		
-		ServletContext application = session.getServletContext();
-				
+		String expertName = request.getParameter("expert_name");
+		String gender = request.getParameter("gender");
+		String jobPosition = request.getParameter("job_position");
+		String project = request.getParameter("project");
+		String employmentDirection = request.getParameter("employment_direction");
+		String org = request.getParameter("org");
+		
 		SearchLogic search = new SearchLogic();
-		ResultSet rs = search.getResult("select * from info");
 		
-		if(null == rs){
-			response.getWriter().print("0");
-		}
+		ResultSet rs = search.getResult("select max(Id) from info");
 		
-		Map<String,ExpertInfoBean> map = new HashMap<String,ExpertInfoBean>();
-		
-//		List<String> expertNameList = new ArrayList<String>();
-		List<ExpertInfoBean> expertList = new ArrayList<ExpertInfoBean>();
-		
-		ExpertInfoBean bean = null;
-		
+		int expertId = 0;
 		try {
-			while(rs.next()){
-				
-				bean = new ExpertInfoBean();
-				bean.setExpertId(rs.getInt("Id"));
-				bean.setExpertName(rs.getString("expert_name"));
-				bean.setBirth_death(rs.getString("birth_death"));
-				bean.setJob_position(rs.getString("job_position"));
-				bean.setProject(rs.getString("project"));
-				bean.setCount_reward(rs.getInt("count_reward"));
-				bean.setCount_paper(rs.getInt("count_paper"));
-				bean.setCount_patent(rs.getInt("count_patent"));
-				bean.setEmployment_direction(rs.getString("employment_direction"));
-				bean.setGender(rs.getString("gender"));
-				bean.setOrg(rs.getString("org"));
-				bean.setPic_name(rs.getString("pic_name"));
-				
-				map.put(bean.getExpertName(), bean);
-				
-//				expertList.add(bean.getExpertName());
-				expertList.add(bean);
-			}
+			rs.next();
+			expertId = rs.getInt("max(Id)") + 1;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		search.closeBD();
+		String sql = "insert into info(Id,expert_name,job_position,project,employment_direction,gender,org,del_sign) values ('" +
+				expertId + "', '" +
+				expertName + "', '" +
+				jobPosition + "', '" +
+				project + "', '" +
+				employmentDirection + "', '" +
+				gender + "', '" +
+				org + "', " +
+				"1" + ")";
 		
-		application.setAttribute("listMap", map);
-		application.setAttribute("expertInfoList",expertList);
+		boolean isInsertSuccess = search.execute(sql);
 		
-		JSONArray json = JSONArray.fromObject(expertList);
+		if(isInsertSuccess)
+			session.setAttribute("response", "添加成功");
+		else
+			session.setAttribute("response", "添加失败");
 		
-//		response.getWriter().print(expertList);
-		response.getWriter().print(json.toString());
+		response.sendRedirect("../pages/Response.jsp");
 		
 	}
 

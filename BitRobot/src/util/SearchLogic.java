@@ -52,6 +52,19 @@ public class SearchLogic{
     }
 	
 	/**
+	 * 执行数据库插入
+	 * */
+	public boolean execute(String sql){  
+		
+		if(null == DBConnectionProperties.getConnection()){
+			return false;
+		}
+
+        return DBConnectionProperties.execute(sql);
+        
+    }
+	
+	/**
 	 * 关闭数据库
 	 * */
 	public void closeBD(){

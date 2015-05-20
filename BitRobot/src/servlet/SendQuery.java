@@ -100,6 +100,12 @@ public class SendQuery extends HttpServlet {
 		
 		map = (Map<String, ExpertInfoBean>) application.getAttribute("listMap");
 		
+//		map 可能为空，因为数据库连接失败或者数据库原因导致map就是一个null
+//		
+//		if(null == map){
+//			
+//		}
+		
 		//获取前台输入框中的信息
 		String content = request.getParameter("content").trim();
 		//定义转换之后的字符串

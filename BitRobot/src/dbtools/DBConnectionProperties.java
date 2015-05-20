@@ -60,8 +60,13 @@ public class DBConnectionProperties {
 	 * */
 	public static boolean execute(String sql){
 
+		int rows = 0;
+		
 		try {
-			if(stmt.execute(sql)){
+			
+			rows = stmt.executeUpdate(sql);
+			
+			if(rows > 0){
 				return true;
 			}
 		} catch (SQLException e) {

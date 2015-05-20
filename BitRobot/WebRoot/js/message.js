@@ -45,13 +45,19 @@ function loadExpertList() {   //获取专家列表并将列表放到leftDiv上
         url: "servlet/LoadExpertListOnInit",
         success: function (data) {
 
-        	var experts = data.substring(1, data.length - 1).split(",");
+//        	var experts = data.substring(1, data.length - 1).split(",");
+        	var expertList = eval("("+data+")");
+
         	
         	var ul = $(".mainDiv .leftDiv #expertDiv ul");
         	
-        	for (var index = 0; experts.length > index; index++) {
+        	console.log(expertList);
+        	
+        	for (var index = 0; expertList.length > index; index++) {
         		
-                ul.append("<li><div><label>" + experts[index] + "</label></div></li>");
+        		var inner = expertList[index];
+        		 
+                ul.append("<li><div> <img style=\" float:left; width:40px; height:40px;  border-radius:50px; clear:both;  margin-left:10px;margin-top:3px; \"  src=\"images/"+inner.pic_name+".jpg\" /><label  style=\" margin-left:10px;\">" + inner.expertName + "</label></div></li>");
                 
             }
         	
