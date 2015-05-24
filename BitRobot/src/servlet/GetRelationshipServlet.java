@@ -60,6 +60,7 @@ public class GetRelationshipServlet extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		doPost(request,response);
 //		response.setContentType("text/html");
 //		PrintWriter out = response.getWriter();
 //		out.println("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">");
@@ -148,6 +149,10 @@ public class GetRelationshipServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		relationshipBean = new RelationshipBean();
+		relationshipBean.setExpertName(map.get(expertName).getPic_name());
+		listJson.add(relationshipBean);
 		
 		search.closeBD();
 		

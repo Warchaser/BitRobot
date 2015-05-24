@@ -14,19 +14,40 @@ import util.PropertiesUtil;
  * @createTime JDBC获取Connection工具类 
  */  
 public class DBConnectionProperties {  
-      
+    
+	/**
+	 * 数据库链接对象
+	 * */
     private static Connection conn = null;  
-      
+    
+    /**
+     * 数据库地址
+     * */
     private static final String URL;  
-      
+    
+    /**
+     * 数据库链接驱动
+     * */
     private static final String JDBC_DRIVER;  
-      
+    
+    /**
+     * 用户名
+     * */
     private static final String USER_NAME;  
-      
+    
+    /**
+     * 密码
+     * */
     private static final String PASSWORD;
     
+    /**
+     * 状态集
+     * */
     private static Statement stmt;
     
+    /**
+     * 结果集
+     * */
     private static ResultSet rs;
     
     /**

@@ -17,17 +17,17 @@ import javax.servlet.http.HttpSession;
 import util.SearchLogic;
 import bean.ExpertInfoBean;
 
-public class AdminAddExpertPaper extends HttpServlet {
+public class AdminAddExpertInterviews extends HttpServlet {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 161466239283575272L;
+	private static final long serialVersionUID = 1155407625459333342L;
 
 	/**
 	 * Constructor of the object.
 	 */
-	public AdminAddExpertPaper() {
+	public AdminAddExpertInterviews() {
 		super();
 	}
 
@@ -79,7 +79,7 @@ public class AdminAddExpertPaper extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		//指定前后台的输入输出字符集均为utf-8
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -92,29 +92,29 @@ public class AdminAddExpertPaper extends HttpServlet {
 		map = (Map<String, ExpertInfoBean>) application.getAttribute("listMap");
 		
 		String expertName = request.getParameter("expertOptions");
-		String paperName = request.getParameter("paper_name");
+		String date = request.getParameter("date");
+		String title = request.getParameter("title");
 		String org = request.getParameter("org");
+		String author = request.getParameter("author");
 		String abs = request.getParameter("abs");
-		String guanjianci = request.getParameter("guanjianci");
-		String fundation = request.getParameter("fundation");
 		String url = request.getParameter("url");
-		String authorCn = request.getParameter("author_cn");
 		int expertId = map.get(expertName).getExpertId();
 		
 		SearchLogic search = new SearchLogic();
-		String sqlPaper = "insert into paper(paper_name,expert_id,expert_org,abs,guanjianci,fundation,url,author_cn) values ('" + 
-						paperName + "'," + 
-						expertId + ",'" + 
-						org + "','" + 
-						abs + "','" + 
-						guanjianci + "','" + 
-						fundation + "','" + 
-						url + "','" + 
-						authorCn + "')";
 		
-		boolean isInsertPaperSuccess = search.execute(sqlPaper);
+		String sqlReward = "insert into interviews (expert_id,date,title,org,author,abs,url) values(" + 
+							expertId + ",'" + 
+							date + "','" + 
+							title + "','" + 
+							org + "','" + 
+							author + "','" + 
+							abs + "','" + 
+							url + "')";
 		
-		String sqlCount = "select count(expert_id) from paper where expert_id like " + expertId;
+		boolean isInsertRewardSuccess = search.execute(sqlReward);
+		
+		String sqlCount = "select count(expert_id) from reward_detail where expert_id like " + expertId;
+		
 		ResultSet rs = search.getResult(sqlCount);
 		
 		int count = 0;
@@ -126,18 +126,19 @@ public class AdminAddExpertPaper extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		String sqlUpdateInfo = "update info set count_paper=" + count + " where Id = " + expertId;
+		String sqlUpdateInfo = "update info set count_reward=" + count + " where Id = " + expertId;
+		
 		boolean isUpdateInfoSuccess = search.execute(sqlUpdateInfo);
 		
-		if(isInsertPaperSuccess && count != 0 && isUpdateInfoSuccess){
+		if(isInsertRewardSuccess && count != 0 && isUpdateInfoSuccess){
 			session.setAttribute("response", "添加成功");
 		}
 		else{
 			session.setAttribute("response", "添加失败");
 		}
 		response.sendRedirect("../pages/Response.jsp");
-		
 	}
+
 
 	/**
 	 * Initialization of the servlet. <br>

@@ -34,6 +34,21 @@
     <servlet-name>AdminAddExpertPaper</servlet-name>
     <servlet-class>servlet.AdminAddExpertPaper</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>AdminAddExpertUpdates</servlet-name>
+    <servlet-class>servlet.AdminAddExpertUpdates</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AdminAddExpertAchive</servlet-name>
+    <servlet-class>servlet.AdminAddExpertAchive</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>AdminAddExpertInterviews</servlet-name>
+    <servlet-class>servlet.AdminAddExpertInterviews</servlet-class>
+  </servlet>
+
+
+
 
 
 
@@ -73,6 +88,18 @@
   <servlet-mapping>
     <servlet-name>AdminAddExpertPaper</servlet-name>
     <url-pattern>/servlet/AdminAddExpertPaper</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminAddExpertUpdates</servlet-name>
+    <url-pattern>/servlet/AdminAddExpertUpdates</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminAddExpertAchive</servlet-name>
+    <url-pattern>/servlet/AdminAddExpertAchive</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>AdminAddExpertInterviews</servlet-name>
+    <url-pattern>/servlet/AdminAddExpertInterviews</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>

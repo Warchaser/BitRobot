@@ -35,6 +35,7 @@ window.onload=function ()
         success: function (data) {
         	
         	var div = $("#div1");
+        	var div2 = $("#div2");
         
         	var addimgman = "<img style=\" width:70px; height:70px; border-radius:50px; \"  src=\"images/moren-man.jpg\"/>";
         	
@@ -49,11 +50,13 @@ window.onload=function ()
         	var size2 = "</font>";
         	
         	var relationshipList = eval("("+data+")");
+        	var picname = relationshipList[relationshipList.length - 1].expertName;
+        	div2.append( "<img style=\" width:100px; height:100px; border-radius:50px; margin-top:20%;  margin-left:40%; \"  src=\"images/" + 
+        			picname + ".jpg\"/>");
         	
-        	for(var i = 0; i < relationshipList.length; i++){
+        	
+        	for(var i = 0; i < relationshipList.length - 1; i++){
         		var inner = relationshipList[i];
-        		 
-        		
         		 
         		if(inner.sex == "男"){
         			div.append("<a>" + addimgman + huanhang +  size1 + inner.name + size2 + "--" + size1 + inner.newType + size2 + "</a>");

@@ -18,7 +18,12 @@ import javax.servlet.http.HttpServletResponse;
 import net.sf.json.JSONException;
 import net.sf.json.JSONObject;
 import bean.ExpertInfoBean;
+import bean.InterviewsBean;
+import bean.PaperBean;
+import bean.PatentBean;
+import bean.QuestionBean;
 import bean.SearchBean;
+import bean.UpdatesBean;
 import util.SearchLogic;
 
 /**
@@ -99,11 +104,13 @@ public class SendQuery extends HttpServlet {
 		Map<String,ExpertInfoBean> map = new HashMap<String,ExpertInfoBean>();
 		
 		map = (Map<String, ExpertInfoBean>) application.getAttribute("listMap");
+
+		JSONObject jsonObject = new JSONObject();
 		
-//		map 可能为空，因为数据库连接失败或者数据库原因导致map就是一个null
-//		
+//		map 可能为空，因为数据库连接失败或者数据库原因导致map就是一个null	
 //		if(null == map){
-//			
+//			jsonObject.put("sendResult",0);
+//			return ;			
 //		}
 		
 		//获取前台输入框中的信息
@@ -113,13 +120,12 @@ public class SendQuery extends HttpServlet {
 		
 		SearchLogic search = new SearchLogic();
 		
-		String [] queryStrings = {content,content + "*"};
-		String [] fields = {"title","abs"};
-		String indexPath = "D:\\index1";
+		//问题引导搜索，固定搜索question 
+		String [] queryStrings = {content};
+		String [] fields = {"first_key"};
+		String indexPath = "D:\\index1\\question";
 		
-		List<SearchBean> searchList = new ArrayList<SearchBean>();
-		
-		JSONObject jsonObject = new JSONObject();
+		List<QuestionBean> searchListQuestion = new ArrayList<QuestionBean>();
 		
 		Date sendTime = new Date();
 		
@@ -130,64 +136,208 @@ public class SendQuery extends HttpServlet {
 			file.mkdir();
         }
 		
-		//不存在索引就走完整的流程
+		//不存在索引就走完整的流程，创建问题索引
 		if(file.listFiles().length == 0){
-			search.createIndex(search.getResult("select expert_id,date,title,org,author,abs,url from interviews"), indexPath);
+			search.createIndex(search.getResult("select id,first_key,table_name,index_file,second_key,field,bean from question " ),"question", indexPath);
 		}
 		
-		searchList = search.searcher(queryStrings, fields, indexPath);
-		search.closeBD();
+		//返回问题分流表
+		searchListQuestion = search.searcherQuestionBean(queryStrings, fields, indexPath);
+		System.out.println(searchListQuestion.size());
+		System.out.println("分流完毕");
 		
-		int listSize = searchList.size();
-		//获取请求的数量
-		int requestNum = 5;
-		
-		if(listSize <= requestNum){
-			requestNum = listSize;
-		}
+		//choice  进入二级表搜索判断变量 默认值为1。  1为需要进入   0为不需要
+		int choice = 1;
 
-		try {
-			if(null != map.get(content)){
-		
-				contentTrans += "少侠是要问我的信息？</br>";
-				contentTrans += "我是" + content + ",";
-				contentTrans += map.get(content).getJob_position() + "。";
-				contentTrans += "参与过" + map.get(content).getProject();
-				contentTrans += map.get(content).getEmployment_direction();
-				
-				jsonObject.put("sendResult",1);
-				
-				jsonObject.put("content", contentTrans);
-				
-				jsonObject.put("sendTime",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(sendTime));
-				
+		if(searchListQuestion.size() != 0 &&  !searchListQuestion.get(0).getSecond_key().equals("null") ) {
+			try {
+			
+			//去除返回的二级关键字中分隔符“；”
+			String[] second_key = searchListQuestion.get(0).getSecond_key().split(";",0);
+			
+			//向前台发送返回数据列表   二级关键字或信息列表
+			contentTrans += content+"的信息过于笼统,</br>";
+			contentTrans += "请选择如下分类:</br>";
+			for(int i = 0;i<second_key.length;i++)
+				contentTrans += (i + 1)+"、"+second_key[i]+"</br>";
+			jsonObject.put("sendResult",1);
+			
+			jsonObject.put("content", contentTrans);
+			
+			jsonObject.put("sendTime",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(sendTime));		
+			
+			//进入二级表搜索判断变量置0。  1为需要进入   0为不需要
+			choice = 0;
+			
+			} catch (JSONException e) {
+				e.printStackTrace();
 			}
-			else{
-				if(listSize > 0){
-					for(int i = listSize - 1;i >= listSize - requestNum;i--){
-						contentTrans += searchList.get(i).getTitle();
-						contentTrans += "</br>";
-						contentTrans += searchList.get(i).getAbs();
-						contentTrans += "</br>";
-						contentTrans += "<a href=" + searchList.get(i).getUrl() + " target=\"_blank\">" + "点此链接" + "</a></br>";
-					}
+			
+		}
+		
+		
+		//进入二级表搜索
+		if(choice == 1  ){
+			
+			//自适应list表定义
+			List<?> searchList = null;
+			
+			//返回的数据表长度大于0且数据首关键字 First_key ！= null时，进入二级类表搜索，否则直接跳过搜索返回查询结果
+			if(searchListQuestion.size() > 0 && !searchListQuestion.get(0).getFirst_key().equals("null")){
+				String [] queryString = {content};
+				String [] field = {searchListQuestion.get(0).getField()};
+				indexPath = "D:\\index1\\"+searchListQuestion.get(0).getIndex_file();
+				
+				file = new File(indexPath);
+				//不存在目录就创建
+				if(!file.exists()) {
+					file.mkdir();
+		        }
+				
+				//不存在索引就走完整的流程，创建问题索引
+				if(file.listFiles().length == 0){
+					search = new SearchLogic();
+					search.createIndex(search.getResult("select * from " + 
+					searchListQuestion.get(0).getTable_name()),searchListQuestion.get(0).getTable_name() ,indexPath);
+				}
+				
+				System.out.println(searchListQuestion.get(0).getBean());
+				//根据不同的bean类型定义不同类型list
+				if(searchListQuestion.get(0).getBean().equals("PaperBean")){
+					searchList = new ArrayList<PaperBean>();
+					searchList = search.searcherPaperBean(queryString, field, indexPath);
+					search.closeBD();
+				}else if(searchListQuestion.get(0).getBean().equals("InterviewsBean") ){
+					searchList = new ArrayList<InterviewsBean>();
+					searchList = search.searcherInterviewsBean(queryString, field, indexPath);
+					search.closeBD();
+				}else if(searchListQuestion.get(0).getBean().equals("PatentBean") ){
+					searchList = new ArrayList<PatentBean>();
+					searchList = search.searcherPatentBean(queryString, field, indexPath);
+					search.closeBD();
+				}else if(searchListQuestion.get(0).getBean().equals("UpdatesBean") ){
+					searchList = new ArrayList<UpdatesBean>();
+					searchList = search.searcherUpdatesBean(queryString, field, indexPath);
+					search.closeBD();
+				}
+			}
+			
+			int listSize = 0;
+			if(searchList != null)
+				listSize = searchList.size();
+			
+			//获取请求的数量，默认值为5，数量小于5且数据不是行程信息时，返回全部全部数据，数量大于5时，返回前5个数据
+			int requestNum = 5;
+			
+			if(listSize >= requestNum && searchListQuestion.get(0).getBean().equals("UpdatesBean")){
+				listSize =  requestNum ;
+			}
+			
+			//专家姓名
+			String expertName = "";
+	
+			try {
+				
+				//向前台发送专家基本信息
+				if(null != map.get(content)){
+					expertName = map.get(content).getExpertName();
+					contentTrans += "少侠是要问我的信息？</br>";
+					contentTrans += "我是" + content + ",";
+					contentTrans += map.get(content).getJob_position().replace("；", "</br>") + "。</br>";
+					contentTrans += "参与过" + map.get(content).getProject().replace("；", "</br>");
+					contentTrans += map.get(content).getEmployment_direction();
 					jsonObject.put("sendResult",1);
 					
 					jsonObject.put("content", contentTrans);
 					
 					jsonObject.put("sendTime",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(sendTime));
+					
 				}
+				
+				//向前台发送其他信息
 				else{
-					jsonObject.put("sendResult",1);
 					
-					jsonObject.put("content", "木有查到啊～亲～");
+					//向前台发送采访信息
+					if(searchListQuestion.get(0).getBean() == "InterviewsBean"){
+						for(int i = 0;i < listSize;i++){
+							contentTrans += ((InterviewsBean) searchList.get(i)).getTitle();
+							contentTrans += "</br>";
+							contentTrans += ((InterviewsBean) searchList.get(i)).getAbs();
+							contentTrans += "</br>";
+							contentTrans += "<a href=" + ((InterviewsBean) searchList.get(i)).getUrl() + 
+									" target=\"_blank\">" + "点此链接" + "</a></br>";
+						}
+						jsonObject.put("sendResult",1);
+						
+						jsonObject.put("content", contentTrans);
+						
+						jsonObject.put("sendTime",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(sendTime));
+					}
 					
-					jsonObject.put("sendTime",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(sendTime));
+					//向前台发送论文信息
+					else if(searchListQuestion.get(0).getBean().equals("PaperBean")){
+						for(int i = 0;i < listSize;i++){
+							contentTrans += ((PaperBean) searchList.get(i)).getPaper_name();
+							contentTrans += "</br>";
+							contentTrans += ((PaperBean) searchList.get(i)).getAbs();
+							contentTrans += "</br>";
+							contentTrans += ((PaperBean) searchList.get(i)).getGuanjianci();
+							contentTrans += "</br>";
+							contentTrans += "<a href=" + ((PaperBean) searchList.get(i)).getUrl() + 
+									" target=\"_blank\">" + "点此链接" + "</a></br>";
+						}
+						jsonObject.put("sendResult",1);
+						
+						jsonObject.put("content", contentTrans);
+						
+						jsonObject.put("sendTime",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(sendTime));
+					}
+					
+					//向前台发送专利信息
+					else if(searchListQuestion.get(0).getBean().equals("PatentBean")){
+						for(int i = 0;i < listSize;i++){
+							contentTrans += ((PatentBean) searchList.get(i)).getPatent_name();
+							contentTrans += "</br>";
+							contentTrans += ((PatentBean) searchList.get(i)).getPatent_date();
+							contentTrans += "</br>";
+							contentTrans += ((PatentBean) searchList.get(i)).getPatent_id();
+							contentTrans += "</br>";
+							contentTrans += "<a href=" + ((PaperBean) searchList.get(i)).getUrl() + 
+									" target=\"_blank\">" + "点此链接" + "</a></br>";
+						}
+						jsonObject.put("sendResult",1);
+						
+						jsonObject.put("content", contentTrans);
+						
+						jsonObject.put("sendTime",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(sendTime));
+					}
+					
+					//向前台发送行程信息
+					else if(searchListQuestion.get(0).getBean().equals("UpdatesBean")){
+						for(int i = 0;i < listSize;i++){
+							contentTrans += ((UpdatesBean) searchList.get(i)).getDate();
+							contentTrans += "</br>";
+							contentTrans += ((UpdatesBean) searchList.get(i)).getAbs();
+							contentTrans += "</br>";
+						}
+						jsonObject.put("sendResult",1);
+						
+						jsonObject.put("content", contentTrans);
+						
+						jsonObject.put("sendTime",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(sendTime));
+					}
+					else{
+						jsonObject.put("sendResult",1);
+						
+						jsonObject.put("content", "木有查到啊～亲～");
+						
+						jsonObject.put("sendTime",(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")).format(sendTime));
+					}
 				}
+				
+			} catch (JSONException e) {
+				e.printStackTrace();
 			}
-			
-		} catch (JSONException e) {
-			e.printStackTrace();
 		}
 		
 		response.getWriter().print(jsonObject);

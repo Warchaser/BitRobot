@@ -17,17 +17,17 @@ import javax.servlet.http.HttpSession;
 import util.SearchLogic;
 import bean.ExpertInfoBean;
 
-public class AdminAddExpertPaper extends HttpServlet {
+public class AdminAddExpertUpdates extends HttpServlet {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 161466239283575272L;
+	private static final long serialVersionUID = 6900029954153006590L;
 
 	/**
 	 * Constructor of the object.
 	 */
-	public AdminAddExpertPaper() {
+	public AdminAddExpertUpdates() {
 		super();
 	}
 
@@ -79,7 +79,7 @@ public class AdminAddExpertPaper extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		//指定前后台的输入输出字符集均为utf-8
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -92,44 +92,32 @@ public class AdminAddExpertPaper extends HttpServlet {
 		map = (Map<String, ExpertInfoBean>) application.getAttribute("listMap");
 		
 		String expertName = request.getParameter("expertOptions");
-		String paperName = request.getParameter("paper_name");
-		String org = request.getParameter("org");
-		String abs = request.getParameter("abs");
-		String guanjianci = request.getParameter("guanjianci");
-		String fundation = request.getParameter("fundation");
-		String url = request.getParameter("url");
-		String authorCn = request.getParameter("author_cn");
 		int expertId = map.get(expertName).getExpertId();
+		String date = request.getParameter("date");
+		String abs = request.getParameter("abs");
 		
 		SearchLogic search = new SearchLogic();
-		String sqlPaper = "insert into paper(paper_name,expert_id,expert_org,abs,guanjianci,fundation,url,author_cn) values ('" + 
-						paperName + "'," + 
-						expertId + ",'" + 
-						org + "','" + 
-						abs + "','" + 
-						guanjianci + "','" + 
-						fundation + "','" + 
-						url + "','" + 
-						authorCn + "')";
 		
-		boolean isInsertPaperSuccess = search.execute(sqlPaper);
+		String sqlMax = "select max(Id) from updates";
+		ResultSet rs = search.getResult(sqlMax);
 		
-		String sqlCount = "select count(expert_id) from paper where expert_id like " + expertId;
-		ResultSet rs = search.getResult(sqlCount);
-		
-		int count = 0;
+		int max = 0;
 		try {
 			rs.next();
-			count = rs.getInt("count(expert_id)");
+			max = rs.getInt("max(Id)") + 1;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		String sqlUpdateInfo = "update info set count_paper=" + count + " where Id = " + expertId;
-		boolean isUpdateInfoSuccess = search.execute(sqlUpdateInfo);
+		String sqlUpdates = "insert into updates (Id,expert_id,date,abs) values(" + 
+					max + "," + 
+					expertId + ",'" + 
+					date + "','" + 
+					abs + "')";
 		
-		if(isInsertPaperSuccess && count != 0 && isUpdateInfoSuccess){
+		boolean isInsertUpdatesSuccess = search.execute(sqlUpdates);
+		if(isInsertUpdatesSuccess){
 			session.setAttribute("response", "添加成功");
 		}
 		else{

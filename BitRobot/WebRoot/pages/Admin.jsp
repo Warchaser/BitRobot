@@ -20,5 +20,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <a href="pages/AdminAddExpertPatent.jsp" target="_blank">添加专家专利</a><br>
     <a href="pages/AdminAddExpertReward.jsp" target="_blank">添加专家获奖</a><br>
     <a href="pages/AdminAddExpertRelationship.jsp" target="_blank">添加专家关系</a><br>
+    <a href="pages/AdminAddExpertPaper.jsp" target="_blank">添加专家论文</a><br>
+    <a href="pages/AdminAddExpertUpdates.jsp" target="_blank">添加专家新闻</a><br>
+    <a href="pages/AdminAddExpertAchive.jsp" target="_blank">添加专家成果</a><br>
+    <a href="pages/AdminAddExpertInterviews.jsp" target="_blank">添加专家采访</a><br>
   </body>
 </html>

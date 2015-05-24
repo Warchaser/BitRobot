@@ -97,7 +97,7 @@ function sendMessage(content) {   //像服务器发送新的消息
 
 function addNewMsgByServer(sendTime,content) {//从服务器传回来的消息，并格式化
     var messageDiv = $("#messageDiv");
-    var newDiv = "<div style=\"float: left; display: block; clear:both;\"> <img style=\" float:left; width:50px; height:50px;   border-radius:50px; clear:both;\"  src=\"images/avatar.jpg\" /> </div>" +
+    var newDiv = "<div style=\"float: left; display: block; clear:both;\"> <img style=\" float:left; width:50px; height:50px;   border-radius:50px; clear:both;\"  src=\"images/android.jpg\" /> </div>" +
      			   "<div class = \"send\"  style = \"float:left;  margin-left:20px;\">"+"<div class=\"arrowleft\"></div>" + "<h6>" + "</h6>";
     newDiv += content + "</div>";
     messageDiv.append(newDiv);
